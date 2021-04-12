@@ -1,15 +1,17 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
-import { menuItems } from '../../constants/menu-items'
+
 import MenuItems from './MenuItems'
+import { Link } from 'react-router-dom'
 
-export const MenuContainer = () => {
-	return menuItems.map((menuItem, i) => (
+export const MenuContainer = ({ menuItems }) => {
+	return menuItems.map((item, i) => (
 		<Menu.Item key={i}>
-			<Menu.Header>{menuItem.header}</Menu.Header>
-
+			<Link to={item.path}>
+				<Menu.Header>{item.header}</Menu.Header>
+			</Link>
 			<Menu.Menu>
-				<MenuItems links={menuItem.names} />
+				<MenuItems links={item.subRoutes} />
 			</Menu.Menu>
 		</Menu.Item>
 	))
