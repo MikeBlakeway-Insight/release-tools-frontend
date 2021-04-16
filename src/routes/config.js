@@ -11,20 +11,13 @@
  * way you do inside a `<Switch>`
  */
 
-import { PageNotFound, HomePage } from '../pages'
+import { PageNotFound, HoldingPage, HomePage } from '../pages'
 
 export const routesConfig = [
 	{
-		path: '/process-time-api',
-		component: HomePage,
-		title: 'Release Process Time Report',
-		subTitle: 'Run a process time report',
-	},
-
-	{
 		path: '/',
 		component: HomePage,
-		title: 'SDLC Release Toolt',
+		title: 'SDLC Release Tool',
 		subTitle: 'Welcome to the SDLC release tool dashboard',
 		exact: true,
 	},
