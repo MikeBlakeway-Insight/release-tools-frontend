@@ -1,9 +1,9 @@
 import React from 'react'
-import { Header } from 'semantic-ui-react'
+import { Grid, Header } from 'semantic-ui-react'
 
 export const ContainerWithHeader = ({ children, subTitle, title }) => {
 	return (
-		<>
+		<Grid padded>
 			<Header
 				as='h2'
 				icon
@@ -14,7 +14,7 @@ export const ContainerWithHeader = ({ children, subTitle, title }) => {
 				<Header.Subheader>{subTitle}</Header.Subheader>
 			</Header>
 			{children}
-		</>
+		</Grid>
 	)
 }
 

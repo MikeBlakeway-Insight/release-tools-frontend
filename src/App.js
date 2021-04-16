@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import Navigation from './layout/Navigation'
 import RoutesMap from './routes/RoutesMap'
-import { ColumnLeft, ColumnRight } from './layout/Grid'
+import { ColumnLeft, ColumnRight } from './layout/Columns'
 
 function App() {
 	return (

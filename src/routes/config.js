@@ -11,9 +11,16 @@
  * way you do inside a `<Switch>`
  */
 
-import { PageNotFound, HoldingPage, HomePage } from '../pages'
+import { PageNotFound, AuditReports, HomePage } from '../pages'
 
 export const routesConfig = [
+	{
+		path: '/audit-reports',
+		component: AuditReports,
+		title: 'Audit Reports Dashboard',
+		subTitle: 'Select which report you would like to run',
+		exact: true,
+	},
 	{
 		path: '/',
 		component: HomePage,

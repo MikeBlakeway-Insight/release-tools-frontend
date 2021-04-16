@@ -1,8 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { Grid } from 'semantic-ui-react'
 import { routesConfig } from './config'
-import { ContainerWithHeader } from '../layout/Grid'
+import { ContainerWithHeader } from '../layout/ContainerWithHeader'
 
 /**
  * ==============
@@ -21,11 +20,9 @@ export const RoutesMap = () => {
 		<Switch>
 			{routesConfig.map((route, i) => (
 				<Route key={i} exact={route.exact} path={route.path}>
-					<Grid columns='equal' padded stackable>
-						<ContainerWithHeader title={route.title} subTitle={route.subTitle}>
-							<route.component />
-						</ContainerWithHeader>
-					</Grid>
+					<ContainerWithHeader title={route.title} subTitle={route.subTitle}>
+						<route.component />
+					</ContainerWithHeader>
 				</Route>
 			))}
 		</Switch>
