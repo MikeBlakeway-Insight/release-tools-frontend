@@ -1,11 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import Navigation from './layout/Navigation'
-import { routesConfig } from './routes/config'
-import Dashboard from './layout/Dashboard'
-
-import { ColumnLeft, ColumnRight } from './layout/common'
+import RoutesMap from './routes/RoutesMap'
+import { ColumnLeft, ColumnRight } from './layout/Grid'
 
 function App() {
 	return (
@@ -15,22 +13,9 @@ function App() {
 			</ColumnLeft>
 
 			<ColumnRight>
-				<Switch>
-					{routesConfig.map((route, i) => (
-						<RouteWithSubRoutes key={i} {...route} />
-					))}
-				</Switch>
+				<RoutesMap />
 			</ColumnRight>
 		</Router>
-	)
-}
-function RouteWithSubRoutes(route) {
-	return (
-		<Route exact path={route.path}>
-			<Dashboard>
-				<route.component />
-			</Dashboard>
-		</Route>
 	)
 }
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Header, Menu, Divider, Icon } from 'semantic-ui-react'
-import { endpointsList, auditsList } from './menu-items'
+import { endpointsList, reportsList } from './menu-items'
 import MenuContainer from './MenuContainer'
+import { Link } from 'react-router-dom'
 
 /**
  * ==============
@@ -16,20 +17,21 @@ import MenuContainer from './MenuContainer'
 export const Navigation = () => {
 	return (
 		<Menu fluid borderless compact inverted vertical>
-			<Header
-				as='h3'
-				textAlign='center'
-				inverted
-				content='RELEASE TOOL'
-				style={{ paddingTop: '1rem' }}
-			/>
-
+			<Link to='/'>
+				<Header
+					as='h3'
+					textAlign='center'
+					inverted
+					content='SDLC RELEASE TOOL'
+					style={{ paddingTop: '1rem' }}
+				/>
+			</Link>
 			<Divider />
 
 			<Menu.Item>
 				<Icon name='paper plane outline' />
 				<Menu.Header>REPORTS</Menu.Header>
-				<MenuContainer menuItems={auditsList} />
+				<MenuContainer menuItems={reportsList} />
 			</Menu.Item>
 
 			<Divider />

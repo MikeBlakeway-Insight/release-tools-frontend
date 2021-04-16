@@ -200,7 +200,7 @@ export const endpointsList = [
 	},
 ]
 
-export const auditsList = [
+export const reportsList = [
 	{
 		header: 'Audit Reports',
 		path: '/audit-reports',

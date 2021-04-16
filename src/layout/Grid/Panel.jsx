@@ -1,13 +1,13 @@
 import React from 'react'
 import { Grid, Header, Icon, Segment } from 'semantic-ui-react'
 
-export const Panel = ({ children, title, headerElement }) => {
+export const Panel = ({ children, title }) => {
 	return (
 		<Grid.Column>
 			<Segment raised>
 				<Segment basic color='blue'>
 					{title && (
-						<Header as={headerElement} floated='left'>
+						<Header as='h5' floated='left'>
 							{title}
 						</Header>
 					)}
