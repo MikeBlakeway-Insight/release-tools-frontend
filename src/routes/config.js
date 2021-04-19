@@ -11,7 +11,12 @@
  * way you do inside a `<Switch>`
  */
 
-import { PageNotFound, AuditReports, HomePage } from '../pages'
+import {
+	AuditReports,
+	HomePage,
+	PageNotFound,
+	WKTLOReleaseAudit,
+} from '../pages'
 
 export const routesConfig = [
 	{
@@ -19,7 +24,12 @@ export const routesConfig = [
 		component: AuditReports,
 		title: 'Audit Reports Dashboard',
 		subTitle: 'Select which report you would like to run',
-		exact: true,
+	},
+	{
+		path: '/wktlo-release-audit',
+		component: WKTLOReleaseAudit,
+		title: 'WKTLO Release Audit',
+		subTitle: 'Select which release you would like to audit',
 	},
 	{
 		path: '/',
