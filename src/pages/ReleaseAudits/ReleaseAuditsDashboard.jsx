@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Grid } from 'semantic-ui-react'
 
-export const AuditReports = () => {
+export const ReleaseAuditsDashboard = () => {
 	const cards = [
 		{
 			header: 'WKTLO Release Audit',
@@ -38,4 +38,4 @@ export const AuditReports = () => {
 	)
 }
 
-export default AuditReports
+export default ReleaseAuditsDashboard

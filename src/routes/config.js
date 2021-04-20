@@ -12,7 +12,7 @@
  */
 
 import {
-	AuditReports,
+	ReleaseAuditsDashboard,
 	HomePage,
 	PageNotFound,
 	WKTLOReleaseAudit,
@@ -21,7 +21,7 @@ import {
 export const routesConfig = [
 	{
 		path: '/audit-reports',
-		component: AuditReports,
+		component: ReleaseAuditsDashboard,
 		title: 'Audit Reports Dashboard',
 		subTitle: 'Select which report you would like to run',
 	},

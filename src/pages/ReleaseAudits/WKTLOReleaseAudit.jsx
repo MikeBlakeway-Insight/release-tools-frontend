@@ -4,9 +4,14 @@ import { Grid } from 'semantic-ui-react'
 import { ReportConfigBar, StructuredTable } from './components'
 
 import { webAuditReportLines } from '../../data/webAuditRelease-response.json'
-import { ReleaseAuditconfig } from './config/tables.config'
+import { tables_config } from './config/tables_config'
 
 export const WKTLOReleaseAudit = () => {
+	// accessing the headers array on wktlo object
+	const {
+		wktlo: { headers },
+	} = tables_config
+
 	const releases = [
 		{
 			text: '2021-April.1',
@@ -27,10 +32,7 @@ export const WKTLOReleaseAudit = () => {
 			</Grid.Row>
 			<Grid.Row>
 				<Grid.Column>
-					<StructuredTable
-						headers={ReleaseAuditconfig.headers}
-						data={webAuditReportLines}
-					/>
+					<StructuredTable headers={headers} data={webAuditReportLines} />
 				</Grid.Column>
 			</Grid.Row>
 		</>

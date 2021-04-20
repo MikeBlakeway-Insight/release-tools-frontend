@@ -4,5 +4,5 @@ export { HomePage } from './HomePage'
 export { PageNotFound } from './Error/PageNotFound'
 
 // Reports
-export { AuditReports } from './AuditReports'
-export { WKTLOReleaseAudit } from './Insight_Web_EMEA/WKTLOReleaseAudit'
+export { ReleaseAuditsDashboard } from './ReleaseAudits/ReleaseAuditsDashboard'
+export { WKTLOReleaseAudit } from './ReleaseAudits/WKTLOReleaseAudit'
