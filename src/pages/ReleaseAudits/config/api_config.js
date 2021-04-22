@@ -27,5 +27,3 @@ export const api_config = {
 		timezone: 'UTC',
 	},
 }
-
-export { Configuration }
