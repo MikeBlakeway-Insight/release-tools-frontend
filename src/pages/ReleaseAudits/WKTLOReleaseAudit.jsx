@@ -1,38 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid } from 'semantic-ui-react'
 
-import { ReportConfigBar, StructuredTable } from './components'
-
 import { webAuditReportLines } from '../../data/webAuditRelease-response.json'
+import { ReportConfigBar, StructuredTable } from './components'
 import { tables_config } from './config/tables_config'
+import { api_config } from './config/api_config'
 
 export const WKTLOReleaseAudit = () => {
-	// accessing the headers array on wktlo object
+	const endpoint = `${api_config.versions.url}WKTLO?showReleased=false`
+	const [selectedRelease, changeSelectedRelease] = useState('')
+
+	// retrieving the headers array from wktlo object
 	const {
 		wktlo: { headers },
 	} = tables_config
-
-	const releases = [
-		{
-			text: '2021-April.1',
-			value: '2021-April.1',
-		},
-		{
-			text: 'DM Test Cycle 2',
-			value: 'DM Test Cycle 2',
-		},
-	]
 
 	return (
 		<>
 			<Grid.Row>
 				<Grid.Column>
-					<ReportConfigBar options={releases} />
+					<ReportConfigBar
+						changeSelection={changeSelectedRelease}
+						apiUrl={endpoint}
+					/>
 				</Grid.Column>
 			</Grid.Row>
 			<Grid.Row>
 				<Grid.Column>
-					<StructuredTable headers={headers} data={webAuditReportLines} />
+					<StructuredTable
+						selectedRelease={selectedRelease}
+						headers={headers}
+						data={webAuditReportLines}
+					/>
 				</Grid.Column>
 			</Grid.Row>
 		</>
