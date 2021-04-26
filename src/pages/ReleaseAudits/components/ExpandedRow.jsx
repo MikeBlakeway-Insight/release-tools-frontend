@@ -1,6 +1,5 @@
 import React from 'react'
 import { List, Table, Icon } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 
 export const ExpandedRow = ({ headers, row_id, row, visibleRow }) => {
 	const styles = {
