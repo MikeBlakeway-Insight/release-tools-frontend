@@ -10,7 +10,11 @@ import {
 	Placeholder,
 } from 'semantic-ui-react'
 
+<<<<<<< HEAD
 export const ReportConfigBar = ({ url, changeSelection }) => {
+=======
+export const ReportConfigBar = ({ apiUrl, changeSelection }) => {
+>>>>>>> cc989b39fdc6f3d2b5ca781a83c93175a5dc6057
 	const [error, setError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [dropdownOptions, setDropdownOptions] = useState([])
@@ -19,7 +23,11 @@ export const ReportConfigBar = ({ url, changeSelection }) => {
 		const doFetch = async () => {
 			setIsLoading(true)
 			try {
+<<<<<<< HEAD
 				const res = await fetch(url)
+=======
+				const res = await fetch(apiUrl)
+>>>>>>> cc989b39fdc6f3d2b5ca781a83c93175a5dc6057
 				const body = await res.json()
 				setDropdownOptions(
 					// converting the body response into a new array for the dropdown component options
@@ -52,7 +60,11 @@ export const ReportConfigBar = ({ url, changeSelection }) => {
 					<Placeholder.Line />
 				</Placeholder>
 			) : (
+<<<<<<< HEAD
 				<Card fluid color='pink'>
+=======
+				<Card fluid color='blue'>
+>>>>>>> cc989b39fdc6f3d2b5ca781a83c93175a5dc6057
 					<Card.Content>
 						<Grid verticalAlign='middle'>
 							<Grid.Column width={4}>
