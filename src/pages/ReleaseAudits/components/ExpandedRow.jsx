@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Table } from 'semantic-ui-react'
+import React from 'react'
+import { List, Table, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export const ExpandedRow = ({ headers, row_id, row, visibleRow }) => {
 	const styles = {
-		display: visibleRow === row_id ? '' : 'none',
+		display: visibleRow === row_id ? 'table-cell' : 'none',
 		backgroundColor: '#e6f1fd',
 		width: '100%',
 	}
@@ -16,23 +17,34 @@ export const ExpandedRow = ({ headers, row_id, row, visibleRow }) => {
 						<Table.Header>
 							<Table.Row textAlign='center'>
 								{headers.map(cell => (
-									<Table.HeaderCell key={cell}>{cell}</Table.HeaderCell>
+									<Table.HeaderCell key={cell}>{cell.toUpperCase()}</Table.HeaderCell>
 								))}
 							</Table.Row>
 						</Table.Header>
 
 						<Table.Body>
 							{row.map(cell => (
-								<Table.Row key={cell.id}>
+								<Table.Row key={cell.id} textAlign='center'>
 									<Table.Cell>{cell.id}</Table.Cell>
 									<Table.Cell>{cell.title}</Table.Cell>
 									<Table.Cell>{cell.link}</Table.Cell>
 									<Table.Cell>{cell.status}</Table.Cell>
-									<Table.Cell>{cell.closed}</Table.Cell>
+									<Table.Cell>
+										{cell.closed ? <Icon name='check' /> : <Icon name='close' />}
+									</Table.Cell>
 									<Table.Cell>{cell.author}</Table.Cell>
-									<Table.Cell>{cell.celler}</Table.Cell>
-									<Table.Cell>{cell.id}</Table.Cell>
-									<Table.Cell>{cell.id}</Table.Cell>
+									<Table.Cell>{cell.reviewer}</Table.Cell>
+									<Table.Cell>
+										<List
+											size='tiny'
+											items={cell.codeReviewers.map(({ name }) => name)}
+										/>
+									</Table.Cell>
+									<Table.Cell>
+										<a rel='noreferrer' target='_blank' href={cell.repository.link}>
+											{cell.repository.name}
+										</a>
+									</Table.Cell>
 								</Table.Row>
 							))}
 						</Table.Body>
