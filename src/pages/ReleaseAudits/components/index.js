@@ -1,2 +1,4 @@
 export { ReportConfigBar } from './ReportConfigBar'
-export { StructuredTable } from './StructuredTable'
+export { ExpandingRowsTable } from './ExpandingRowsTable'
+export { ExpandedRow } from './ExpandedRow'
+export { TableHeaders } from './TableHeaders'

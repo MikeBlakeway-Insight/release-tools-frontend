@@ -52,7 +52,7 @@ export const ReportConfigBar = ({ url, changeSelection }) => {
 					<Placeholder.Line />
 				</Placeholder>
 			) : (
-				<Card fluid color='blue'>
+				<Card fluid color='pink'>
 					<Card.Content>
 						<Grid verticalAlign='middle'>
 							<Grid.Column width={4}>

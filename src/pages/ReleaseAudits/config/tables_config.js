@@ -22,5 +22,16 @@ export const tables_config = {
 				subheaders: ['Required', 'Committed', 'Differentials'],
 			},
 		],
+		expanded_headers: [
+			'id',
+			'title',
+			'link',
+			'status',
+			'closed',
+			'author',
+			'reviewer',
+			'codeReviewers',
+			'repository',
+		],
 	},
 }
