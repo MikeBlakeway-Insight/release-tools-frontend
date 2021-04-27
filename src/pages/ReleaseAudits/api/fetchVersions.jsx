@@ -1,7 +1,7 @@
 import { api_config } from '../config/api_config'
 import { useFetch } from '../../../hooks/useFetch'
 
-export const fetchVersions(projectKey, showReleased, setReleases) {
+export const fetchVersions = (projectKey, showReleased, setReleases) => {
 	// retrieving the url from api_config.versions
 	const {
 		versions: { url },

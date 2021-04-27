@@ -10,55 +10,36 @@ import {
 	Placeholder,
 } from 'semantic-ui-react'
 
-export const ReportConfigBar = ({ url, changeSelection }) => {
-	const [error, setError] = useState(false)
-	const [isLoading, setIsLoading] = useState(false)
-	const [dropdownOptions, setDropdownOptions] = useState([])
-
-	useEffect(() => {
-		const doFetch = async () => {
-			setIsLoading(true)
-			try {
-				const res = await fetch(url)
-				const body = await res.json()
-				setDropdownOptions(
-					// converting the body response into a new array for the dropdown component options
-					body.map(object => {
-						return {
-							key: object.id,
-							text: object.name,
-							value: object.name,
-						}
-					})
-				)
-				setIsLoading(false)
-			} catch (error) {
-				setError(error)
-				setIsLoading(false)
-			}
-		}
-		doFetch()
-	}, [])
-
+export const ReportConfigBar = ({
+	changeSelection,
+	checked,
+	dropdownOptions,
+	error,
+	isLoading,
+	setChecked,
+}) => {
 	const handleDropdownSelect = (e, { value }) => changeSelection(value)
+	const toggleChecked = () => setChecked(value => !value)
 	return (
 		<>
-			{isLoading ? (
-				<Placeholder>
-					<Placeholder.Line />
-					<Placeholder.Line />
-					<Placeholder.Line />
-					<Placeholder.Line />
-					<Placeholder.Line />
-				</Placeholder>
-			) : (
-				<Card fluid color='pink'>
-					<Card.Content>
-						<Grid verticalAlign='middle'>
-							<Grid.Column width={4}>
-								<Checkbox toggle label='Show Released' />
-							</Grid.Column>
-							<Grid.Column width={5}>
+			<Card fluid color='pink'>
+				<Card.Content>
+					<Grid verticalAlign='middle'>
+						<Grid.Column width={4}>
+							<Checkbox
+								checked={checked}
+								onClick={toggleChecked}
+								toggle
+								label='Show Released'
+							/>
+						</Grid.Column>
+						<Grid.Column width={5}>
+							{isLoading ? (
+								<Placeholder>
+									<Placeholder.Line />
+									<Placeholder.Line />
+								</Placeholder>
+							) : (
 								<Dropdown
 									fluid
 									selection
@@ -66,20 +47,20 @@ export const ReportConfigBar = ({ url, changeSelection }) => {
 									options={dropdownOptions}
 									onChange={handleDropdownSelect}
 								/>
-							</Grid.Column>
-							<Grid.Column width={4}>
-								<Button basic icon color='blue' size='small' labelPosition='left'>
-									<Icon name='play' color='blue' />
-									Run Report
-								</Button>
-							</Grid.Column>
-							<Grid.Column width={3} floated='right'>
-								<Checkbox radio label='Use Cache' />
-							</Grid.Column>
-						</Grid>
-					</Card.Content>
-				</Card>
-			)}
+							)}
+						</Grid.Column>
+						<Grid.Column width={4}>
+							<Button basic icon color='blue' size='small' labelPosition='left'>
+								<Icon name='play' color='blue' />
+								Run Report
+							</Button>
+						</Grid.Column>
+						<Grid.Column width={3} floated='right'>
+							<Checkbox radio label='Use Cache' />
+						</Grid.Column>
+					</Grid>
+				</Card.Content>
+			</Card>
 
 			{error && (
 				<Message negative>

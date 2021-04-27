@@ -3,7 +3,6 @@ import { Icon, Table, Button } from 'semantic-ui-react'
 import { TableHeaders, ExpandedRow } from '.'
 
 export const ExpandingRowsTable = ({ headers, expanded_headers, rows }) => {
-	console.log(rows[1].codeReviews)
 	const [visibleRow, changeVisibleRow] = useState('')
 	const changeRowVisibility = (e, data) => {
 		const { row_id } = data
