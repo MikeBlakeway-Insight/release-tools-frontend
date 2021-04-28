@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Grid } from 'semantic-ui-react'
 
-import { tables_config } from '../../config/tables_config'
+import { tables_config } from '../../constants/tables_config'
+import { api_config } from '../../constants/api_config'
 
 import { ExpandingRowsTable, ReportConfigBar } from '../../components'
-import { api_config } from '../../config/api_config'
 import { performWebAudit } from '../../api'
 
 export const WKTLOReleaseAudit = () => {

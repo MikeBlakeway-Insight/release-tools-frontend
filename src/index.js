@@ -1,14 +1,18 @@
 import React, { StrictMode } from 'react'
 import { render } from 'react-dom'
 import 'semantic-ui-css/semantic.min.css'
+import { Provider } from 'react-redux'
 
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import store from './redux/store'
 
 const root = document.getElementById('root')
 render(
 	<StrictMode>
-		<App />
+		<Provider store={store}>
+			<App />
+		</Provider>
 	</StrictMode>,
 	root
 )
