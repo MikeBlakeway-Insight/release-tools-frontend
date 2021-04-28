@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
-import { Icon, Table, Button } from 'semantic-ui-react'
+import { Icon, Table, Placeholder, Button } from 'semantic-ui-react'
 import { TableHeaders, ExpandedRow } from '.'
 
-export const ExpandingRowsTable = ({ headers, expanded_headers, rows }) => {
+export const ExpandingRowsTable = ({
+	headers,
+	expanded_headers,
+	rows,
+	isLoading,
+}) => {
 	const [visibleRow, changeVisibleRow] = useState('')
+
 	const changeRowVisibility = (e, data) => {
 		const { row_id } = data
 		row_id != visibleRow ? changeVisibleRow(row_id) : changeVisibleRow('')
@@ -18,8 +24,12 @@ export const ExpandingRowsTable = ({ headers, expanded_headers, rows }) => {
 				visibleRow={visibleRow}
 			/>
 		))
-
-	return (
+	return isLoading ? (
+		<Placeholder>
+			<Placeholder.Line />
+			<Placeholder.Line />
+		</Placeholder>
+	) : (
 		<Table color='pink' size='small' celled selectable>
 			<TableHeaders headers={headers} />
 			<Table.Body>{createTableRows()}</Table.Body>
@@ -36,10 +46,18 @@ const TableRow = ({
 	return (
 		<>
 			<Table.Row textAlign='center'>
-				<Table.Cell textAlign='left'>{row.issue}</Table.Cell>
+				<Table.Cell collapsing textAlign='left'>
+					{row.issue}
+				</Table.Cell>
 				<Table.Cell textAlign='left'>{row.summary}</Table.Cell>
-				<Table.Cell>
-					{row.itcTickets.length != 0 ? row.itcTickets.length : 'None'}
+				<Table.Cell collapsing>
+					{row.itcTickets.length != 0
+						? row.itcTickets.map(ticket => (
+								<span key={ticket} style={{ display: 'block' }}>
+									{ticket}
+								</span>
+						  ))
+						: 'None'}
 				</Table.Cell>
 				<Table.Cell collapsing>{row.type}</Table.Cell>
 				<Table.Cell collapsing>
@@ -49,24 +67,61 @@ const TableRow = ({
 						</span>
 					))}
 				</Table.Cell>
-				<Table.Cell collapsing>{row.status}</Table.Cell>
+				<Table.Cell
+					collapsing
+					warning={row.status === 'In Progress'}
+					positive={row.status === 'Done'}
+					error={row.status === 'Unassigned'}
+				>
+					{row.status}
+				</Table.Cell>
 				<Table.Cell collapsing>{row.developer}</Table.Cell>
-				<Table.Cell collapsing>
-					{row.requiresDesign ? <Icon name='check' /> : <Icon name='close' />}
-				</Table.Cell>
-				<Table.Cell collapsing>
-					{row.designComplete ? <Icon name='check' /> : <Icon name='close' />}
-				</Table.Cell>
-				<Table.Cell collapsing>
-					{row.designReviewed ? <Icon name='check' /> : <Icon name='close' />}
-				</Table.Cell>
+				{row.requiresDesign ? (
+					<Table.Cell positive collapsing>
+						<Icon name='check' />
+					</Table.Cell>
+				) : (
+					<Table.Cell error collapsing>
+						<Icon name='close' />
+					</Table.Cell>
+				)}
+				{row.designComplete ? (
+					<Table.Cell positive collapsing>
+						<Icon name='check' />
+					</Table.Cell>
+				) : (
+					<Table.Cell error collapsing>
+						<Icon name='close' />
+					</Table.Cell>
+				)}
+				{row.designReviewed ? (
+					<Table.Cell positive collapsing>
+						<Icon name='check' />
+					</Table.Cell>
+				) : (
+					<Table.Cell error collapsing>
+						<Icon name='close' />
+					</Table.Cell>
+				)}
 				<Table.Cell>{row.designReviewedBy}</Table.Cell>
-				<Table.Cell collapsing>
-					{row.requiresCode ? <Icon name='check' /> : <Icon name='close' />}
-				</Table.Cell>
-				<Table.Cell collapsing>
-					{row.codeCommitted ? <Icon name='check' /> : <Icon name='close' />}
-				</Table.Cell>
+				{row.requiresCode ? (
+					<Table.Cell positive collapsing>
+						<Icon name='check' />
+					</Table.Cell>
+				) : (
+					<Table.Cell error collapsing>
+						<Icon name='close' />
+					</Table.Cell>
+				)}
+				{row.codeCommitted ? (
+					<Table.Cell positive collapsing>
+						<Icon name='check' />
+					</Table.Cell>
+				) : (
+					<Table.Cell error collapsing>
+						<Icon name='close' />
+					</Table.Cell>
+				)}
 				<Table.Cell>
 					<Button
 						basic

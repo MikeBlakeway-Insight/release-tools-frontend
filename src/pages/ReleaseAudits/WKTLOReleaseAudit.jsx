@@ -1,68 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import { Grid } from 'semantic-ui-react'
-import { tables_config } from './config/tables_config'
-import { webAuditReportLines } from '../../data/webAuditRelease-response.json'
-import { ExpandingRowsTable, ReportConfigBar } from './components'
 
+import { tables_config } from './config/tables_config'
+
+import { ExpandingRowsTable, ReportConfigBar } from './components'
 import { api_config } from './config/api_config'
+import { performWebAudit } from './api/performWebAudit'
 
 export const WKTLOReleaseAudit = () => {
-	const [selectedRelease, changeSelectedRelease] = useState('')
-	const [error, setError] = useState(false)
+	const [fixVersion, setFixVersion] = useState('')
+	const [auditData, updateAuditData] = useState([])
+	const [refresh, setRefresh] = useState(Boolean)
 	const [isLoading, setIsLoading] = useState(false)
-	const [dropdownOptions, setDropdownOptions] = useState([])
-	const [checked, setChecked] = useState(false)
 
-	const endpoint = `${api_config.versions.url}WKTLO?showReleased=${checked}`
 	const {
 		wktlo: { expanded_headers, headers },
 	} = tables_config
+	const versionsEndpoint = `${api_config.versions.url}WKTLO`
+	const auditEndpoint = `${api_config.webAudit.url}?jql=fixVersion=${fixVersion}&refresh=${refresh}`
 
 	useEffect(() => {
-		const doFetch = async () => {
-			setIsLoading(true)
-			try {
-				const res = await fetch(endpoint)
-				const body = await res.json()
-				setDropdownOptions(
-					// converting the body response into a new array for the dropdown component options
-					body.map(object => {
-						return {
-							key: object.id,
-							text: object.name,
-							value: object.name,
-						}
-					})
-				)
-				setIsLoading(false)
-			} catch (error) {
-				setError(error)
-				setIsLoading(false)
-			}
-		}
-		doFetch()
-	}, [checked])
+		fixVersion && performWebAudit(updateAuditData, auditEndpoint, setIsLoading)
+	}, [fixVersion])
+
 	return (
 		<>
 			<Grid.Row>
 				<Grid.Column>
 					<ReportConfigBar
-						isLoading={isLoading}
-						setChecked={setChecked}
-						checked={checked}
-						changeSelection={changeSelectedRelease}
-						dropdownOptions={dropdownOptions}
-						error={error}
+						setRefresh={setRefresh}
+						endpoint={versionsEndpoint}
+						setFixVersion={setFixVersion}
 					/>
 				</Grid.Column>
 			</Grid.Row>
 			<Grid.Row>
 				<Grid.Column>
-					<ExpandingRowsTable
-						expanded_headers={expanded_headers}
-						headers={headers}
-						rows={webAuditReportLines}
-					/>
+					{fixVersion && (
+						<ExpandingRowsTable
+							expanded_headers={expanded_headers}
+							headers={headers}
+							rows={auditData}
+							isLoading={isLoading}
+						/>
+					)}
 				</Grid.Column>
 			</Grid.Row>
 		</>

@@ -9,17 +9,32 @@ import {
 	Message,
 	Placeholder,
 } from 'semantic-ui-react'
+import { fetchReleases } from '../api/fetchReleases'
 
-export const ReportConfigBar = ({
-	changeSelection,
-	checked,
-	dropdownOptions,
-	error,
-	isLoading,
-	setChecked,
-}) => {
-	const handleDropdownSelect = (e, { value }) => changeSelection(value)
-	const toggleChecked = () => setChecked(value => !value)
+export const ReportConfigBar = ({ setFixVersion, endpoint }) => {
+	// State
+	const [release, setRelease] = useState([])
+	const [error, setError] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
+	const [checked, setChecked] = useState(false)
+	const [dropdownValue, setDropdownValue] = useState('')
+
+	// Handlers
+	const handleDropdownSelect = (e, { value }) => setDropdownValue(value)
+	const handleClick = e => {
+		e.preventDefault
+		setFixVersion(dropdownValue)
+	}
+	const toggleChecked = () => setChecked(checked => !checked)
+
+	useEffect(() => {
+		fetchReleases(`${endpoint}?showReleased=${checked}`, {
+			setError,
+			setIsLoading,
+			setData: setRelease,
+		})
+	}, [checked])
+
 	return (
 		<>
 			<Card fluid color='pink'>
@@ -44,13 +59,20 @@ export const ReportConfigBar = ({
 									fluid
 									selection
 									placeholder='Select release'
-									options={dropdownOptions}
+									options={release}
 									onChange={handleDropdownSelect}
 								/>
 							)}
 						</Grid.Column>
 						<Grid.Column width={4}>
-							<Button basic icon color='blue' size='small' labelPosition='left'>
+							<Button
+								basic
+								icon
+								color='blue'
+								size='small'
+								labelPosition='left'
+								onClick={handleClick}
+							>
 								<Icon name='play' color='blue' />
 								Run Report
 							</Button>
