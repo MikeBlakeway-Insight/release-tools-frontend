@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Icon, Table, Placeholder, Button } from 'semantic-ui-react'
-import { TableHeaders, ExpandedRow } from '.'
+import TableHeaders from './TableHeaders'
+import ExpandedRow from './ExpandedRow'
 
 export const ExpandingRowsTable = ({
 	headers,

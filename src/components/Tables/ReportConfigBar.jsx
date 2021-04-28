@@ -9,7 +9,7 @@ import {
 	Message,
 	Placeholder,
 } from 'semantic-ui-react'
-import { fetchReleases } from '../api/fetchReleases'
+import { fetchReleases } from '../../api/fetchReleases'
 
 export const ReportConfigBar = ({ setFixVersion, endpoint }) => {
 	// State

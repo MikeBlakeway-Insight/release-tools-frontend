@@ -19,3 +19,5 @@ export const fetchReleases = async (
 		setIsLoading(false)
 	}
 }
+
+export default fetchReleases

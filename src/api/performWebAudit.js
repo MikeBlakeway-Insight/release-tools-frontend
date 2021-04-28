@@ -14,3 +14,5 @@ export const performWebAudit = async (
 		setIsLoading(false)
 	}
 }
+
+export default performWebAudit
