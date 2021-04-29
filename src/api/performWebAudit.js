@@ -1,17 +1,18 @@
 export const performWebAudit = async (
 	updateAuditData,
 	auditEndpoint,
-	setIsLoading
+	dispatch
 ) => {
 	try {
-		setIsLoading(true)
+		dispatch({ type: 'SET_LOADING', payload: true })
+		// set loading state from redux
 		const response = await fetch(auditEndpoint)
 		const data = await response.json()
 		updateAuditData(data.webAuditReportLines)
-		setIsLoading(false)
+		dispatch({ type: 'SET_LOADING', payload: false })
 	} catch (error) {
 		error => error.message
-		setIsLoading(false)
+		dispatch({ type: 'SET_LOADING', payload: false })
 	}
 }
 

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { Grid } from 'semantic-ui-react'
 
 import { tables_config } from '../../constants/tables_config'
 import { api_config } from '../../constants/api_config'
 
-import { ExpandingRowsTable, ReportConfigBar } from '../../components'
+import { WebReleaseAuditTable, ReportConfigBar } from '../../components'
 import { performWebAudit } from '../../api'
 
 export const WKTLOReleaseAudit = () => {
+	const dispatch = useDispatch()
+
 	const [fixVersion, setFixVersion] = useState('')
 	const [auditData, updateAuditData] = useState([])
 	const [refresh, setRefresh] = useState(Boolean)
-	const [isLoading, setIsLoading] = useState(false)
 
 	const {
 		wktlo: { expanded_headers, headers },
@@ -20,7 +23,7 @@ export const WKTLOReleaseAudit = () => {
 	const auditEndpoint = `${api_config.webAudit.url}?jql=fixVersion=${fixVersion}&refresh=${refresh}`
 
 	useEffect(() => {
-		fixVersion && performWebAudit(updateAuditData, auditEndpoint, setIsLoading)
+		fixVersion && performWebAudit(updateAuditData, auditEndpoint, dispatch)
 	}, [fixVersion])
 
 	return (
@@ -37,11 +40,10 @@ export const WKTLOReleaseAudit = () => {
 			<Grid.Row>
 				<Grid.Column>
 					{fixVersion && (
-						<ExpandingRowsTable
+						<WebReleaseAuditTable
 							expanded_headers={expanded_headers}
 							headers={headers}
 							rows={auditData}
-							isLoading={isLoading}
 						/>
 					)}
 				</Grid.Column>

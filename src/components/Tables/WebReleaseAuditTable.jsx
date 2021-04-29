@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+
 import { Icon, Table, Placeholder, Button } from 'semantic-ui-react'
 import TableHeaders from './TableHeaders'
 import ExpandedRow from './ExpandedRow'
 
-export const ExpandingRowsTable = ({
-	headers,
-	expanded_headers,
-	rows,
-	isLoading,
-}) => {
+export const WebReleaseAuditTable = ({ headers, expanded_headers, rows }) => {
+	const isLoading = useSelector(state => state.webAudit.isLoading)
 	const [visibleRow, changeVisibleRow] = useState('')
 
 	const changeRowVisibility = (e, data) => {
@@ -146,4 +144,4 @@ const TableRow = ({
 		</>
 	)
 }
-export default ExpandingRowsTable
+export default WebReleaseAuditTable
