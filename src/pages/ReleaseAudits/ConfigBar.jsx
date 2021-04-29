@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import {
 	Button,
 	Card,
@@ -9,30 +11,33 @@ import {
 	Message,
 	Placeholder,
 } from 'semantic-ui-react'
-import { fetchReleases } from '../../api/fetchReleases'
+import { fetchReleases } from './api/fetchReleases'
 
-export const ReportConfigBar = ({ setFixVersion, endpoint }) => {
+export const ConfigBar = ({ endpoint }) => {
+	const dispatch = useDispatch()
+
 	// State
-	const [release, setRelease] = useState([])
-	const [error, setError] = useState(false)
-	const [isLoading, setIsLoading] = useState(false)
 	const [checked, setChecked] = useState(false)
 	const [dropdownValue, setDropdownValue] = useState('')
+
+	const useCache = useSelector(state => state.webAudit.refresh)
+
+	const releaseIsLoading = useSelector(state => state.webAudit.release.loading)
+	const releaseError = useSelector(state => state.webAudit.release.error)
+	const release = useSelector(state => state.webAudit.release.data)
 
 	// Handlers
 	const handleDropdownSelect = (e, { value }) => setDropdownValue(value)
 	const handleClick = e => {
 		e.preventDefault
-		setFixVersion(dropdownValue)
+		dispatch({ type: 'SET_FIXVERSION', payload: dropdownValue })
 	}
 	const toggleChecked = () => setChecked(checked => !checked)
+	const toggleUseCache = () =>
+		dispatch({ type: 'SET_REFRESH', payload: !useCache })
 
 	useEffect(() => {
-		fetchReleases(`${endpoint}?showReleased=${checked}`, {
-			setError,
-			setIsLoading,
-			setData: setRelease,
-		})
+		fetchReleases(`${endpoint}?showReleased=${checked}`, dispatch)
 	}, [checked])
 
 	return (
@@ -49,7 +54,7 @@ export const ReportConfigBar = ({ setFixVersion, endpoint }) => {
 							/>
 						</Grid.Column>
 						<Grid.Column width={5}>
-							{isLoading ? (
+							{releaseIsLoading ? (
 								<Placeholder>
 									<Placeholder.Line />
 									<Placeholder.Line />
@@ -78,20 +83,25 @@ export const ReportConfigBar = ({ setFixVersion, endpoint }) => {
 							</Button>
 						</Grid.Column>
 						<Grid.Column width={3} floated='right'>
-							<Checkbox radio label='Use Cache' />
+							<Checkbox
+								radio
+								label='Use Cache'
+								checked={!useCache}
+								onClick={toggleUseCache}
+							/>
 						</Grid.Column>
 					</Grid>
 				</Card.Content>
 			</Card>
 
-			{error && (
+			{releaseError && (
 				<Message negative>
 					<Message.Header>Error</Message.Header>
-					<p>{error}</p>
+					<p>{releaseError}</p>
 				</Message>
 			)}
 		</>
 	)
 }
 
-export default ReportConfigBar
+export default ConfigBar

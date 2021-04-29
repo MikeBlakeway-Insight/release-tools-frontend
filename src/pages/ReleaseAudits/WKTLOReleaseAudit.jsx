@@ -1,49 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Grid, Placeholder } from 'semantic-ui-react'
 
-import { Grid } from 'semantic-ui-react'
+import { tables_config } from './config/tables_config'
+import { api_config } from './config/api_config'
 
-import { tables_config } from '../../constants/tables_config'
-import { api_config } from '../../constants/api_config'
-
-import { WebReleaseAuditTable, ReportConfigBar } from '../../components'
-import { performWebAudit } from '../../api'
+import ConfigBar from './ConfigBar'
+import AuditTable from './AuditTable'
+import { performWebAudit } from './api/performWebAudit'
 
 export const WKTLOReleaseAudit = () => {
 	const dispatch = useDispatch()
 
-	const [fixVersion, setFixVersion] = useState('')
-	const [auditData, updateAuditData] = useState([])
-	const [refresh, setRefresh] = useState(Boolean)
+	const fixVersion = useSelector(state => state.webAudit.fixVersion)
+	const refresh = useSelector(state => state.webAudit.refresh)
+	const loading = useSelector(state => state.webAudit.loading)
+	const auditData = useSelector(state => state.webAudit.auditData)
 
 	const {
 		wktlo: { expanded_headers, headers },
 	} = tables_config
-	const versionsEndpoint = `${api_config.versions.url}WKTLO`
+
+	const configBarUrl = `${api_config.versions.url}WKTLO`
 	const auditEndpoint = `${api_config.webAudit.url}?jql=fixVersion=${fixVersion}&refresh=${refresh}`
 
 	useEffect(() => {
-		fixVersion && performWebAudit(updateAuditData, auditEndpoint, dispatch)
+		fixVersion && performWebAudit(auditEndpoint, dispatch)
 	}, [fixVersion])
 
 	return (
 		<>
 			<Grid.Row>
 				<Grid.Column>
-					<ReportConfigBar
-						setRefresh={setRefresh}
-						endpoint={versionsEndpoint}
-						setFixVersion={setFixVersion}
-					/>
+					<ConfigBar endpoint={configBarUrl} />
 				</Grid.Column>
 			</Grid.Row>
 			<Grid.Row>
 				<Grid.Column>
-					{fixVersion && (
-						<WebReleaseAuditTable
+					{loading ? (
+						<Placeholder>
+							<Placeholder.Line />
+							<Placeholder.Line />
+						</Placeholder>
+					) : (
+						<AuditTable
+							rows={auditData}
 							expanded_headers={expanded_headers}
 							headers={headers}
-							rows={auditData}
 						/>
 					)}
 				</Grid.Column>

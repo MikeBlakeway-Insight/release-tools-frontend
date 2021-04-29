@@ -11,24 +11,24 @@ export const TableHeaders = ({ headers }) => {
 		return subheadersArray
 	}
 
-	const Headers = headers.map((header, i) => (
-		<Table.HeaderCell key={i} colSpan={header.subheaders.length}>
-			{header.title}
-		</Table.HeaderCell>
-	))
-
 	const Subheaders = getSubHeaders(headers).map((subheader, i) => (
 		<Table.HeaderCell key={i}>{subheader}</Table.HeaderCell>
 	))
 
 	return (
-		<Table.Header>
-			<Table.Row textAlign='center'>{Headers}</Table.Row>
+		<>
+			<Table.Row textAlign='center'>
+				{headers.map((header, i) => (
+					<Table.HeaderCell key={i} colSpan={header.subheaders.length}>
+						{header.title}
+					</Table.HeaderCell>
+				))}
+			</Table.Row>
 
 			<Table.Row textAlign='center' style={{ fontSize: '.75rem' }}>
 				{Subheaders}
 			</Table.Row>
-		</Table.Header>
+		</>
 	)
 }
 
