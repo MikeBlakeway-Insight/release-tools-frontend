@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Table } from 'semantic-ui-react'
-import TableHeaders from '../../components/Tables/TableHeaders'
-import ExpandingTableRows from '../../components/Tables/ExpandingTableRows'
+import TableHeaders from '../../layout/Tables/TableHeaders'
+import ExpandingTableRows from '../../layout/Tables/ExpandingTableRows'
 
 export const AuditTable = ({ headers, expanded_headers, rows }) =>
 	// checking we have rows before rendering

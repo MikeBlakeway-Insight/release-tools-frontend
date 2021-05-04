@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header, Menu, Divider, Icon } from 'semantic-ui-react'
-import { endpointsList, reportsList } from './nav-components/menu-items'
-import MenuContainer from './nav-components/MenuContainer'
+import { endpointsList, reportsList } from './menu-items'
+import MenuContainer from './MenuContainer'
 import { Link } from 'react-router-dom'
 
 /**

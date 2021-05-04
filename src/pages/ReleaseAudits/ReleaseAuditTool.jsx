@@ -9,7 +9,7 @@ import ConfigBar from './ConfigBar'
 import AuditTable from './AuditTable'
 import { performWebAudit } from './api/performWebAudit'
 
-export const WKTLOReleaseAudit = () => {
+export const ReleaseAuditTool = () => {
 	const dispatch = useDispatch()
 
 	const fixVersion = useSelector(state => state.webAudit.fixVersion)
@@ -55,4 +55,4 @@ export const WKTLOReleaseAudit = () => {
 	)
 }
 
-export default WKTLOReleaseAudit
+export default ReleaseAuditTool

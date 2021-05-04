@@ -5,4 +5,4 @@ export { PageNotFound } from './Error/PageNotFound'
 
 // Reports
 export { ReleaseAuditsDashboard } from './ReleaseAudits/ReleaseAuditsDashboard'
-export { WKTLOReleaseAudit } from './ReleaseAudits/WKTLOReleaseAudit'
+export { ReleaseAuditTool } from './ReleaseAudits/ReleaseAuditTool'

@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import Navigation from './layout/Navigation'
+import Navigation from './layout/Navigation/Navigation'
 import RoutesMap from './routes/RoutesMap'
-import { ColumnLeft, ColumnRight } from './layout/Columns'
+import { ColumnLeft, ColumnRight } from './layout/Grid/Columns'
 
 function App() {
 	return (

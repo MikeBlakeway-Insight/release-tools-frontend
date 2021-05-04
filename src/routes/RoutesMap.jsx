@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { routesConfig } from './config'
-import { ContainerWithHeader } from '../layout/ContainerWithHeader'
+import { ContainerWithHeader } from '../layout/Grid/ContainerWithHeader'
 
 /**
  * ==============
