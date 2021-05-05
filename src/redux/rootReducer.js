@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { reducer as webAuditReducer } from './Audits/webAuditReducer'
+import { reducer as releaseAudits } from './Audits/auditsReducer'
 
 export const rootReducer = combineReducers({
-	webAudit: webAuditReducer,
+	releaseAudits,
 })
 
 export default rootReducer

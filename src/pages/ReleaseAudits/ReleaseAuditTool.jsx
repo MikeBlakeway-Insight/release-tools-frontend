@@ -2,31 +2,29 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Placeholder } from 'semantic-ui-react'
 
+import { getAuditData } from './api/getAuditData'
 import { tables_config } from './config/tables_config'
 import { api_config } from './config/api_config'
 
 import ConfigBar from './ConfigBar'
 import AuditTable from './AuditTable'
-import { performWebAudit } from './api/performWebAudit'
 
 export const ReleaseAuditTool = () => {
 	const dispatch = useDispatch()
-
-	const fixVersion = useSelector(state => state.webAudit.fixVersion)
-	const refresh = useSelector(state => state.webAudit.refresh)
-	const loading = useSelector(state => state.webAudit.loading)
-	const auditData = useSelector(state => state.webAudit.auditData)
+	const { fixVersions, config, loading, data } = useSelector(
+		state => state.releaseAudits
+	)
 
 	const {
 		wktlo: { expanded_headers, headers },
 	} = tables_config
 
 	const configBarUrl = `${api_config.versions.url}WKTLO`
-	const auditEndpoint = `${api_config.webAudit.url}?jql=fixVersion=${fixVersion}&refresh=${refresh}`
+	const auditEndpoint = `${api_config.webAudit.url}?jql=fixVersion=${fixVersions.selected}&refresh=${config.refresh}`
 
 	useEffect(() => {
-		fixVersion && performWebAudit(auditEndpoint, dispatch)
-	}, [fixVersion])
+		fixVersions?.selected && getAuditData(auditEndpoint, dispatch)
+	}, [fixVersions.selected])
 
 	return (
 		<>
@@ -44,7 +42,7 @@ export const ReleaseAuditTool = () => {
 						</Placeholder>
 					) : (
 						<AuditTable
-							rows={auditData}
+							rows={data}
 							expanded_headers={expanded_headers}
 							headers={headers}
 						/>

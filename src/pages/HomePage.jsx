@@ -5,7 +5,7 @@ import {
 	HighChartDemoArea,
 	StatsExampleRow,
 	TablesExampleRow,
-} from './Placeholders'
+} from '../layout/Placeholders'
 
 export const HomePage = () => {
 	return (

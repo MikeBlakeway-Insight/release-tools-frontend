@@ -11,34 +11,36 @@ import {
 	Message,
 	Placeholder,
 } from 'semantic-ui-react'
-import { fetchReleases } from './api/fetchReleases'
+
+import { getFixVersions } from './api/getFixVersions'
+import ACTIONS from '../../redux/constants'
+const {
+	CONFIG__TOGGLE_REFRESH,
+	CONFIG__TOGGLE_RELEASED,
+	FIXVERSION__UPDATE_SELECTED,
+} = ACTIONS
 
 export const ConfigBar = ({ endpoint }) => {
 	const dispatch = useDispatch()
 
 	// State
-	const [checked, setChecked] = useState(false)
+	const { fixVersions, config } = useSelector(state => state.releaseAudits)
 	const [dropdownValue, setDropdownValue] = useState('')
 
-	const useCache = useSelector(state => state.webAudit.refresh)
-
-	const releaseIsLoading = useSelector(state => state.webAudit.release.loading)
-	const releaseError = useSelector(state => state.webAudit.release.error)
-	const release = useSelector(state => state.webAudit.release.data)
-
 	// Handlers
-	const handleDropdownSelect = (e, { value }) => setDropdownValue(value)
-	const handleClick = e => {
+	const changeFixVersion = (e, { value }) => setDropdownValue(value)
+	const handleUpdate = e => {
 		e.preventDefault
-		dispatch({ type: 'SET_FIXVERSION', payload: dropdownValue })
+		dispatch({ type: FIXVERSION__UPDATE_SELECTED, payload: dropdownValue })
 	}
-	const toggleChecked = () => setChecked(checked => !checked)
-	const toggleUseCache = () =>
-		dispatch({ type: 'SET_REFRESH', payload: !useCache })
+	const toggleReleased = () =>
+		dispatch({ type: CONFIG__TOGGLE_RELEASED, payload: !config.showReleased })
+	const toggleRefresh = () =>
+		dispatch({ type: CONFIG__TOGGLE_REFRESH, payload: !config.refresh })
 
 	useEffect(() => {
-		fetchReleases(`${endpoint}?showReleased=${checked}`, dispatch)
-	}, [checked])
+		getFixVersions(`${endpoint}?showReleased=${config.showReleased}`, dispatch)
+	}, [config.showReleased])
 
 	return (
 		<>
@@ -47,14 +49,14 @@ export const ConfigBar = ({ endpoint }) => {
 					<Grid verticalAlign='middle'>
 						<Grid.Column width={4}>
 							<Checkbox
-								checked={checked}
-								onClick={toggleChecked}
+								checked={config.showReleased}
+								onClick={toggleReleased}
 								toggle
 								label='Show Released'
 							/>
 						</Grid.Column>
 						<Grid.Column width={5}>
-							{releaseIsLoading ? (
+							{fixVersions.loading ? (
 								<Placeholder>
 									<Placeholder.Line />
 									<Placeholder.Line />
@@ -64,8 +66,8 @@ export const ConfigBar = ({ endpoint }) => {
 									fluid
 									selection
 									placeholder='Select release'
-									options={release}
-									onChange={handleDropdownSelect}
+									options={fixVersions.list}
+									onChange={changeFixVersion}
 								/>
 							)}
 						</Grid.Column>
@@ -76,7 +78,7 @@ export const ConfigBar = ({ endpoint }) => {
 								color='blue'
 								size='small'
 								labelPosition='left'
-								onClick={handleClick}
+								onClick={handleUpdate}
 							>
 								<Icon name='play' color='blue' />
 								Run Report
@@ -86,18 +88,18 @@ export const ConfigBar = ({ endpoint }) => {
 							<Checkbox
 								radio
 								label='Use Cache'
-								checked={!useCache}
-								onClick={toggleUseCache}
+								checked={!config.refresh}
+								onClick={toggleRefresh}
 							/>
 						</Grid.Column>
 					</Grid>
 				</Card.Content>
 			</Card>
 
-			{releaseError && (
+			{fixVersions.error && (
 				<Message negative>
 					<Message.Header>Error</Message.Header>
-					<p>{releaseError}</p>
+					<p>{fixVersions.error}</p>
 				</Message>
 			)}
 		</>
