@@ -11,7 +11,7 @@ import AuditTable from './AuditTable'
 
 export const ReleaseAuditTool = () => {
 	const dispatch = useDispatch()
-	const { fixVersions, config, loading, data } = useSelector(
+	const { fixVersions, config, audit } = useSelector(
 		state => state.releaseAudits
 	)
 
@@ -35,14 +35,14 @@ export const ReleaseAuditTool = () => {
 			</Grid.Row>
 			<Grid.Row>
 				<Grid.Column>
-					{loading ? (
+					{audit.loading ? (
 						<Placeholder>
 							<Placeholder.Line />
 							<Placeholder.Line />
 						</Placeholder>
 					) : (
 						<AuditTable
-							rows={data}
+							rows={audit.data}
 							expanded_headers={expanded_headers}
 							headers={headers}
 						/>
