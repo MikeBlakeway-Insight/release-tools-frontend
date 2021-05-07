@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Placeholder } from 'semantic-ui-react'
 
-import { getAuditData } from './api/getAuditData'
+import { getAuditData } from './services/getAuditData'
 import { tables_config } from './config/tables_config'
 import { api_config } from './config/api_config'
 
