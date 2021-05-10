@@ -1,4 +1,4 @@
-export const tables_config = {
+export const TABLES_CONFIG = {
 	wktlo: {
 		headers: [
 			{

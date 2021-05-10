@@ -1,4 +1,4 @@
-import ACTIONS from '../../../redux/constants'
+import ACTIONS from '../redux/constants'
 const {
 	FIXVERSION__UPDATE_LIST,
 	FIXVERSION__TOGGLE_LOADING,

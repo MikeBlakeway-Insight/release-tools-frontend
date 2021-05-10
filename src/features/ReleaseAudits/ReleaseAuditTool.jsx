@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Placeholder } from 'semantic-ui-react'
 
-import { getAuditData } from './services/getAuditData'
-import { tables_config } from './config/tables_config'
-import { api_config } from './config/api_config'
+import { getAuditData } from '../../services/getAuditData'
+import { TABLES_CONFIG } from '../../constants/tables'
+import { API_CONSTANTS } from '../../constants/api'
 
 import ConfigBar from './ConfigBar'
 import AuditTable from './AuditTable'
@@ -17,10 +17,10 @@ export const ReleaseAuditTool = () => {
 
 	const {
 		wktlo: { expanded_headers, headers },
-	} = tables_config
+	} = TABLES_CONFIG
 
-	const configBarUrl = `${api_config.versions.url}WKTLO`
-	const auditEndpoint = `${api_config.webAudit.url}?jql=fixVersion=${fixVersions.selected}&refresh=${config.refresh}`
+	const configBarUrl = `${API_CONSTANTS.versions.url}WKTLO`
+	const auditEndpoint = `${API_CONSTANTS.webAudit.url}?jql=fixVersion=${fixVersions.selected}&refresh=${config.refresh}`
 
 	useEffect(() => {
 		fixVersions?.selected && getAuditData(auditEndpoint, dispatch)

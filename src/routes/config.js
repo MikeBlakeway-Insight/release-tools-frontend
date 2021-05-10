@@ -11,12 +11,8 @@
  * way you do inside a `<Switch>`
  */
 
-import {
-	ReleaseAuditsDashboard,
-	HomePage,
-	PageNotFound,
-	ReleaseAuditTool,
-} from '../pages'
+import { ReleaseAuditsDashboard, HomePage, PageNotFound } from '../pages'
+import { ReleaseAuditTool } from '../features/ReleaseAudits/ReleaseAuditTool'
 
 export const routesConfig = [
 	{

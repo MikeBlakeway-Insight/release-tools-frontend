@@ -1,4 +1,4 @@
-export const api_config = {
+export const API_CONSTANTS = {
 	projects: {
 		url: '/api/v1/jira/projects',
 		allowed: ['ICARE', 'ITC', 'GNA', 'WKTLO'],

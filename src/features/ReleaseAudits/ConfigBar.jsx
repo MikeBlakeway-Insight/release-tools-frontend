@@ -12,7 +12,7 @@ import {
 	Placeholder,
 } from 'semantic-ui-react'
 
-import { getFixVersions } from './services/getFixVersions'
+import { getFixVersions } from '../../services/getFixVersions'
 import ACTIONS from '../../redux/constants'
 const {
 	CONFIG__TOGGLE_REFRESH,

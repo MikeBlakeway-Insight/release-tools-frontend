@@ -1,4 +1,4 @@
-export const audit_cards = [
+export const AUDIT_CARDS = [
 	{
 		header: 'WKTLO Release Audit',
 		description:

@@ -1,5 +1,5 @@
 import React from 'react'
-import ReleaseAuditsDashboard from './ReleaseAudits/ReleaseAuditsDashboard'
+import ReleaseAuditsDashboard from './ReleaseAuditsDashboard'
 
 import {
 	HighChartDemoArea,

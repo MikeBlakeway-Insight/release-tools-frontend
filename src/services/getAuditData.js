@@ -1,4 +1,4 @@
-import ACTIONS from '../../../redux/constants'
+import ACTIONS from '../redux/constants'
 const {
 	AUDIT__TOGGLE_LOADING,
 	AUDIT__UPDATE_DATA,

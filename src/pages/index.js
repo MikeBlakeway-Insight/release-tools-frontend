@@ -1,8 +1,7 @@
 export { HomePage } from './HomePage'
 
 // Error Pages
-export { PageNotFound } from './Error/PageNotFound'
+export { PageNotFound } from './PageNotFound'
 
 // Reports
-export { ReleaseAuditsDashboard } from './ReleaseAudits/ReleaseAuditsDashboard'
-export { ReleaseAuditTool } from './ReleaseAudits/ReleaseAuditTool'
+export { ReleaseAuditsDashboard } from './ReleaseAuditsDashboard'
