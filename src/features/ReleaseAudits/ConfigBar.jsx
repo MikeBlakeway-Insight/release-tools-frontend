@@ -11,36 +11,35 @@ import {
 	Message,
 	Placeholder,
 } from 'semantic-ui-react'
-
+import {
+	changeActiveVersion,
+	changeShowReleased,
+	changeRefresh,
+} from './versionSlice'
 import { getFixVersions } from '../../services/getFixVersions'
-import ACTIONS from '../../redux/constants'
-const {
-	CONFIG__TOGGLE_REFRESH,
-	CONFIG__TOGGLE_RELEASED,
-	FIXVERSION__UPDATE_SELECTED,
-} = ACTIONS
 
 export const ConfigBar = ({ endpoint }) => {
 	const dispatch = useDispatch()
 
 	// State
-	const { fixVersions, config } = useSelector(state => state.releaseAudits)
+	const { version } = useSelector(state => state)
+
 	const [dropdownValue, setDropdownValue] = useState('')
 
 	// Handlers
 	const changeFixVersion = (e, { value }) => setDropdownValue(value)
 	const handleUpdate = e => {
 		e.preventDefault
-		dispatch({ type: FIXVERSION__UPDATE_SELECTED, payload: dropdownValue })
+		dispatch(changeActiveVersion(dropdownValue))
 	}
 	const toggleReleased = () =>
-		dispatch({ type: CONFIG__TOGGLE_RELEASED, payload: !config.showReleased })
-	const toggleRefresh = () =>
-		dispatch({ type: CONFIG__TOGGLE_REFRESH, payload: !config.refresh })
+		dispatch(changeShowReleased(!version.showReleased))
+
+	const toggleRefresh = () => dispatch(changeRefresh(!version.refresh))
 
 	useEffect(() => {
-		getFixVersions(`${endpoint}?showReleased=${config.showReleased}`, dispatch)
-	}, [config.showReleased])
+		getFixVersions(`${endpoint}?showReleased=${version.showReleased}`, dispatch)
+	}, [version.showReleased])
 
 	return (
 		<>
@@ -49,14 +48,14 @@ export const ConfigBar = ({ endpoint }) => {
 					<Grid verticalAlign='middle'>
 						<Grid.Column width={4}>
 							<Checkbox
-								checked={config.showReleased}
+								checked={version.showReleased}
 								onClick={toggleReleased}
 								toggle
 								label='Show Released'
 							/>
 						</Grid.Column>
 						<Grid.Column width={5}>
-							{fixVersions.loading ? (
+							{version.loading ? (
 								<Placeholder>
 									<Placeholder.Line />
 									<Placeholder.Line />
@@ -66,7 +65,7 @@ export const ConfigBar = ({ endpoint }) => {
 									fluid
 									selection
 									placeholder='Select release'
-									options={fixVersions.list}
+									options={version.versions}
 									onChange={changeFixVersion}
 								/>
 							)}
@@ -88,7 +87,7 @@ export const ConfigBar = ({ endpoint }) => {
 							<Checkbox
 								radio
 								label='Use Cache'
-								checked={!config.refresh}
+								checked={!version.refresh}
 								onClick={toggleRefresh}
 							/>
 						</Grid.Column>
@@ -96,10 +95,10 @@ export const ConfigBar = ({ endpoint }) => {
 				</Card.Content>
 			</Card>
 
-			{fixVersions.error && (
+			{version.error && (
 				<Message negative>
 					<Message.Header>Error</Message.Header>
-					<p>{fixVersions.error}</p>
+					<p>{version.error}</p>
 				</Message>
 			)}
 		</>

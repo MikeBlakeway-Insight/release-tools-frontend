@@ -1,12 +1,12 @@
-import ACTIONS from '../redux/constants'
-const {
-	FIXVERSION__UPDATE_LIST,
-	FIXVERSION__TOGGLE_LOADING,
-	FIXVERSION__ERROR_RETURNED,
-} = ACTIONS
+import {
+	changeLoading,
+	updateError,
+	updateVersions,
+} from '../features/ReleaseAudits/versionSlice'
 
 export const getFixVersions = async (url, dispatch) => {
-	dispatch({ type: FIXVERSION__TOGGLE_LOADING, payload: true })
+	dispatch(changeLoading(true))
+
 	try {
 		const res = await fetch(url)
 		const body = await res.json()
@@ -15,14 +15,11 @@ export const getFixVersions = async (url, dispatch) => {
 			text: item.name,
 			value: item.id,
 		}))
-		dispatch({
-			type: FIXVERSION__UPDATE_LIST,
-			payload: fixVersions,
-		})
-		dispatch({ type: FIXVERSION__TOGGLE_LOADING, payload: false })
+		dispatch(updateVersions(fixVersions))
+		dispatch(changeLoading(false))
 	} catch (error) {
-		dispatch({ type: FIXVERSION__ERROR_RETURNED, payload: error })
-		dispatch({ type: FIXVERSION__TOGGLE_LOADING, payload: false })
+		dispatch(updateError(error))
+		dispatch(changeLoading(false))
 	}
 }
 

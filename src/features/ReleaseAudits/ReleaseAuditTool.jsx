@@ -11,20 +11,19 @@ import AuditTable from './AuditTable'
 
 export const ReleaseAuditTool = () => {
 	const dispatch = useDispatch()
-	const { fixVersions, config, audit } = useSelector(
-		state => state.releaseAudits
-	)
+
+	const { audit, version } = useSelector(state => state)
 
 	const {
 		wktlo: { expanded_headers, headers },
 	} = TABLES_CONFIG
 
 	const configBarUrl = `${API_CONSTANTS.versions.url}WKTLO`
-	const auditEndpoint = `${API_CONSTANTS.webAudit.url}?jql=fixVersion=${fixVersions.selected}&refresh=${config.refresh}`
+	const auditEndpoint = `${API_CONSTANTS.webAudit.url}?jql=fixVersion=${version.active}&refresh=${version.refresh}`
 
 	useEffect(() => {
-		fixVersions?.selected && getAuditData(auditEndpoint, dispatch)
-	}, [fixVersions.selected])
+		version?.active && getAuditData(auditEndpoint, dispatch)
+	}, [version.active])
 
 	return (
 		<>
