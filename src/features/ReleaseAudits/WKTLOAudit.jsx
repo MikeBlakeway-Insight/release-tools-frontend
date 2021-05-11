@@ -9,7 +9,7 @@ import { API_CONSTANTS } from '../../constants/api'
 import ConfigBar from './ConfigBar'
 import AuditTable from './AuditTable'
 
-export const ReleaseAuditTool = () => {
+export const WKTLOAudit = () => {
 	const dispatch = useDispatch()
 
 	const { audit, version } = useSelector(state => state)
@@ -52,4 +52,4 @@ export const ReleaseAuditTool = () => {
 	)
 }
 
-export default ReleaseAuditTool
+export default WKTLOAudit

@@ -12,7 +12,7 @@
  */
 
 import { ReleaseAuditsDashboard, HomePage, PageNotFound } from '../pages'
-import { ReleaseAuditTool } from '../features/ReleaseAudits/ReleaseAuditTool'
+import { WKTLOAudit } from '../features/ReleaseAudits/WKTLOAudit'
 
 export const routesConfig = [
 	{
@@ -23,7 +23,7 @@ export const routesConfig = [
 	},
 	{
 		path: '/wktlo-release-audit',
-		component: ReleaseAuditTool,
+		component: WKTLOAudit,
 		title: 'WKTLO Release Audit',
 		subTitle: 'Select which release you would like to audit',
 	},
