@@ -27,12 +27,12 @@ export const ReleaseAuditTool = () => {
 
 	return (
 		<>
-			<Grid.Row>
+			<Grid.Row data-testid='configbar-container'>
 				<Grid.Column>
 					<ConfigBar endpoint={configBarUrl} />
 				</Grid.Column>
 			</Grid.Row>
-			<Grid.Row>
+			<Grid.Row data-testid='audit-table'>
 				<Grid.Column>
 					{audit.loading ? (
 						<Placeholder>

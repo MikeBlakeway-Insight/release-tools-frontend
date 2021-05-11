@@ -1,16 +1,36 @@
 import React from 'react'
-
-/**
- * We're using our own custom render function and not RTL's render
- * our custom utils also re-export everything from RTL so we can import
- * fireEvent and screen here as well
- */
-import { render } from '../../../tests/test-utils'
+import * as redux from 'react-redux'
+import { render } from '@testing-library/react'
 
 import ConfigBar from '../ConfigBar'
 
 describe('ConfigBar test suite', () => {
-	test('renders ok', () => {
-		render(<ConfigBar />, { initialState: {} })
+	const useSelectorMock = jest.spyOn(redux, 'useSelector')
+	const useDispatchMock = jest.spyOn(redux, 'useDispatch')
+	const mockFunction = jest.fn()
+
+	const mockState = {
+		version: {
+			showReleased: true,
+			refresh: false,
+			loading: false,
+			error: '',
+			versions: [],
+			active: '',
+		},
+	}
+
+	beforeEach(() => {
+		useSelectorMock.mockClear()
+		useDispatchMock.mockClear()
+	})
+
+	test('renders config-bar', () => {
+		useSelectorMock.mockReturnValue(mockState)
+		useDispatchMock.mockReturnValue(mockFunction)
+
+		const { getByTestId } = render(<ConfigBar />)
+
+		expect(getByTestId('config-bar')).toBeInTheDocument()
 	})
 })

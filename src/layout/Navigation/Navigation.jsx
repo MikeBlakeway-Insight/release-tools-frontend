@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom'
  */
 export const Navigation = () => {
 	return (
-		<Menu fluid borderless compact inverted vertical>
+		<Menu fluid borderless compact inverted vertical data-testid='Navigation'>
 			<Link to='/'>
 				<Header
 					as='h3'

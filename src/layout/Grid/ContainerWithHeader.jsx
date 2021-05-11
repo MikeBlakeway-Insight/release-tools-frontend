@@ -3,7 +3,7 @@ import { Grid, Header } from 'semantic-ui-react'
 
 export const ContainerWithHeader = ({ children, subTitle, title }) => {
 	return (
-		<Grid padded>
+		<Grid padded data-testid='ContainerWithHeader'>
 			<Header
 				as='h2'
 				icon

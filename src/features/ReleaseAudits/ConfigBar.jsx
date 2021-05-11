@@ -43,7 +43,7 @@ export const ConfigBar = ({ endpoint }) => {
 
 	return (
 		<>
-			<Card fluid color='pink'>
+			<Card fluid color='pink' data-testid='config-bar'>
 				<Card.Content>
 					<Grid verticalAlign='middle'>
 						<Grid.Column width={4}>

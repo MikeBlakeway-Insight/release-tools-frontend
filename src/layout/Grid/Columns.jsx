@@ -14,7 +14,11 @@ export const ColumnLeft = ({ children }) => {
 		flex: '1 1 0%',
 	}
 
-	return <div style={styles}>{children}</div>
+	return (
+		<div style={styles} data-testid='ColumnLeft'>
+			{children}
+		</div>
+	)
 }
 
 export const ColumnRight = ({ children }) => {
@@ -23,5 +27,9 @@ export const ColumnRight = ({ children }) => {
 		minWidth: '550px',
 		backgroundColor: '#eee1',
 	}
-	return <div style={styles}>{children}</div>
+	return (
+		<div style={styles} data-testid='ColumnRight'>
+			{children}
+		</div>
+	)
 }
