@@ -2,9 +2,9 @@ import React from 'react'
 import * as redux from 'react-redux'
 import { render } from '@testing-library/react'
 
-import WKTLOAudit from '../WKTLOAudit'
+import ReleaseAudit from '../ReleaseAudit'
 
-describe('WKTLOAudit test suite', () => {
+describe('ReleaseAudit test suite', () => {
 	const useSelectorMock = jest.spyOn(redux, 'useSelector')
 	const useDispatchMock = jest.spyOn(redux, 'useDispatch')
 	const mockFunction = jest.fn()
@@ -33,7 +33,7 @@ describe('WKTLOAudit test suite', () => {
 		useDispatchMock.mockReturnValue(mockFunction)
 		useSelectorMock.mockReturnValue(mockState)
 
-		const { getByTestId } = render(<WKTLOAudit />)
+		const { getByTestId } = render(<ReleaseAudit />)
 
 		expect(getByTestId('configbar-container')).toBeInTheDocument()
 		expect(getByTestId('audit-table')).toBeInTheDocument()

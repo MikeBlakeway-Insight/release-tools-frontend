@@ -1,8 +1,10 @@
 import {
 	changeLoading,
-	updateError,
+	errorReturned,
 	updateVersions,
 } from '../features/ReleaseAudits/versionSlice'
+
+import { createDropdownList } from './utils/createDropdownList'
 
 export const getFixVersions = async (url, dispatch) => {
 	dispatch(changeLoading(true))
@@ -10,15 +12,11 @@ export const getFixVersions = async (url, dispatch) => {
 	try {
 		const res = await fetch(url)
 		const body = await res.json()
-		const fixVersions = await body.map(item => ({
-			key: item.id,
-			text: item.name,
-			value: item.id,
-		}))
+		const fixVersions = await createDropdownList(body)
 		dispatch(updateVersions(fixVersions))
 		dispatch(changeLoading(false))
 	} catch (error) {
-		dispatch(updateError(error))
+		dispatch(errorReturned(error))
 		dispatch(changeLoading(false))
 	}
 }

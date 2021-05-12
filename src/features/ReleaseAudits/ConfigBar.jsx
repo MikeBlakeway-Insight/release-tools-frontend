@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import {
 	Button,
 	Card,
@@ -16,27 +15,30 @@ import {
 	changeShowReleased,
 	changeRefresh,
 } from './versionSlice'
+import { changeActiveProject } from './projectSlice'
 import { getFixVersions } from '../../services/getFixVersions'
 
 export const ConfigBar = ({ endpoint }) => {
 	const dispatch = useDispatch()
 
 	// State
-	const { version } = useSelector(state => state)
+	const { project, version } = useSelector(state => state)
 
-	const [dropdownValue, setDropdownValue] = useState('')
+	const [activeVersion, setActiveVersion] = useState('')
 
 	// Handlers
-	const changeFixVersion = (e, { value }) => setDropdownValue(value)
-	const handleUpdate = e => {
-		e.preventDefault
-		dispatch(changeActiveVersion(dropdownValue))
+	const handlers = {
+		changeFixVersion: (e, { value }) => setActiveVersion(value),
+		changeProject: (e, { value }) => dispatch(changeActiveProject(value)),
+		handleUpdate: e => {
+			e.preventDefault
+			dispatch(changeActiveVersion(activeVersion))
+		},
+		toggleReleased: () => dispatch(changeShowReleased(!version.showReleased)),
+		toggleRefresh: () => dispatch(changeRefresh(!version.refresh)),
 	}
-	const toggleReleased = () =>
-		dispatch(changeShowReleased(!version.showReleased))
 
-	const toggleRefresh = () => dispatch(changeRefresh(!version.refresh))
-
+	// Render
 	useEffect(() => {
 		getFixVersions(`${endpoint}?showReleased=${version.showReleased}`, dispatch)
 	}, [version.showReleased])
@@ -46,30 +48,50 @@ export const ConfigBar = ({ endpoint }) => {
 			<Card fluid color='pink' data-testid='config-bar'>
 				<Card.Content>
 					<Grid verticalAlign='middle'>
-						<Grid.Column width={4}>
+						<Grid.Column width={2} floated='right'>
+							<Checkbox
+								radio
+								label='Use Cache'
+								checked={!version.refresh}
+								onClick={handlers.toggleRefresh}
+							/>
+						</Grid.Column>
+						<Grid.Column width={3}>
 							<Checkbox
 								checked={version.showReleased}
-								onClick={toggleReleased}
+								onClick={handlers.toggleReleased}
 								toggle
 								label='Show Released'
 							/>
 						</Grid.Column>
-						<Grid.Column width={5}>
-							{version.loading ? (
-								<Placeholder>
-									<Placeholder.Line />
-									<Placeholder.Line />
-								</Placeholder>
-							) : (
+
+						{version.loading ? (
+							<Loading width={4} />
+						) : (
+							<Grid.Column width={4}>
+								<Dropdown
+									disabled={project.active === ''}
+									fluid
+									selection
+									placeholder='Select Release'
+									options={version.versions}
+									onChange={handlers.changeFixVersion}
+								/>
+							</Grid.Column>
+						)}
+						{project.loading ? (
+							<Loading width={3} />
+						) : (
+							<Grid.Column width={3}>
 								<Dropdown
 									fluid
 									selection
-									placeholder='Select release'
-									options={version.versions}
-									onChange={changeFixVersion}
+									placeholder='Select Project'
+									options={project.projects}
+									onChange={handlers.changeProject}
 								/>
-							)}
-						</Grid.Column>
+							</Grid.Column>
+						)}
 						<Grid.Column width={4}>
 							<Button
 								basic
@@ -77,32 +99,34 @@ export const ConfigBar = ({ endpoint }) => {
 								color='blue'
 								size='small'
 								labelPosition='left'
-								onClick={handleUpdate}
+								onClick={handlers.handleUpdate}
 							>
 								<Icon name='play' color='blue' />
 								Run Report
 							</Button>
 						</Grid.Column>
-						<Grid.Column width={3} floated='right'>
-							<Checkbox
-								radio
-								label='Use Cache'
-								checked={!version.refresh}
-								onClick={toggleRefresh}
-							/>
-						</Grid.Column>
 					</Grid>
 				</Card.Content>
 			</Card>
-
-			{version.error && (
+			{version.error || project.error ? (
 				<Message negative>
 					<Message.Header>Error</Message.Header>
-					<p>{version.error}</p>
+					<p>{version.error || project.error}</p>
 				</Message>
+			) : (
+				''
 			)}
 		</>
 	)
 }
+
+const Loading = ({ width }) => (
+	<Grid.Column width={width}>
+		<Placeholder>
+			<Placeholder.Line />
+			<Placeholder.Line />
+		</Placeholder>
+	</Grid.Column>
+)
 
 export default ConfigBar

@@ -1,7 +1,7 @@
 import {
 	changeLoading,
 	updateData,
-	updateError,
+	errorReturned,
 } from '../features/ReleaseAudits/auditSlice'
 
 export const getAuditData = async (auditEndpoint, dispatch) => {
@@ -12,10 +12,8 @@ export const getAuditData = async (auditEndpoint, dispatch) => {
 		dispatch(updateData(data.webAuditReportLines))
 		dispatch(changeLoading(false))
 	} catch (error) {
-		error => {
-			dispatch(updateError(error))
-			dispatch(changeLoading(false))
-		}
+		dispatch(errorReturned(error))
+		dispatch(changeLoading(false))
 	}
 }
 

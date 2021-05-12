@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Placeholder } from 'semantic-ui-react'
 
-import { getAuditData } from '../../services/getAuditData'
+import { getAuditData, getProjects } from '../../services'
 import { TABLES_CONFIG } from '../../constants/tables'
 import { API_CONSTANTS } from '../../constants/api'
 
 import ConfigBar from './ConfigBar'
 import AuditTable from './AuditTable'
 
-export const WKTLOAudit = () => {
+export const ReleaseAudit = () => {
 	const dispatch = useDispatch()
 
 	const { audit, version } = useSelector(state => state)
@@ -24,6 +24,10 @@ export const WKTLOAudit = () => {
 	useEffect(() => {
 		version?.active && getAuditData(auditEndpoint, dispatch)
 	}, [version.active])
+
+	useEffect(() => {
+		getProjects(dispatch)
+	}, [API_CONSTANTS.projects.url])
 
 	return (
 		<>
@@ -52,4 +56,4 @@ export const WKTLOAudit = () => {
 	)
 }
 
-export default WKTLOAudit
+export default ReleaseAudit

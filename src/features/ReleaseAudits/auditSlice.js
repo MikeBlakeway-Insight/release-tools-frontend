@@ -14,13 +14,13 @@ export const auditSlice = createSlice({
 		updateData: (state, action) => {
 			return { ...state, data: action.payload }
 		},
-		updateError: (state, action) => {
+		errorReturned: (state, action) => {
 			return { ...state, error: action.payload }
 		},
 	},
 })
 
 // Action creators are generated for each case reducer function
-export const { changeLoading, updateData, updateError } = auditSlice.actions
+export const { changeLoading, updateData, errorReturned } = auditSlice.actions
 
 export default auditSlice.reducer

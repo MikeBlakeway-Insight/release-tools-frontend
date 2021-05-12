@@ -14,7 +14,7 @@ export const versionSlice = createSlice({
 		changeLoading: (state, action) => {
 			return { ...state, loading: action.payload }
 		},
-		updateError: (state, action) => {
+		errorReturned: (state, action) => {
 			return { ...state, error: action.payload }
 		},
 		updateVersions: (state, action) => {
@@ -35,7 +35,7 @@ export const versionSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
 	changeLoading,
-	updateError,
+	errorReturned,
 	updateVersions,
 	changeShowReleased,
 	changeRefresh,
