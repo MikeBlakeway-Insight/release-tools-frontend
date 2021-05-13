@@ -202,26 +202,9 @@ export const endpointsList = [
 
 export const reportsList = [
 	{
-		header: 'Audit Reports',
-		path: '/audit-reports',
+		header: 'Release Audits',
+		path: '/release-audits',
 
-		subRoutes: [
-			{
-				name: 'WKTLO Release Audit',
-				path: '/wktlo-release-audit',
-			},
-			{
-				name: 'WKTLO Sprint Audit',
-				path: '/wktlo-sprint-audit',
-			},
-			{
-				name: 'GNA Release Audit',
-				path: '/gna-release-audit',
-			},
-			{
-				name: 'ITC Release Audit',
-				path: '/itc-release-audit',
-			},
-		],
+		subRoutes: [],
 	},
 ]

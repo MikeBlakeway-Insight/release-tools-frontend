@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ExpandedRow from './ExpandedRow'
 import MainRow from './MainRow'
 
-const ExpandingTableRows = ({ rows, expanded_headers }) => {
+export const ExpandingTable = ({ rows, expanded_headers }) => {
 	const [visibleRow, changeVisibleRow] = useState('')
 
 	const changeRowVisibility = (e, data) => {
@@ -22,4 +22,4 @@ const ExpandingTableRows = ({ rows, expanded_headers }) => {
 	))
 }
 
-export default ExpandingTableRows
+export default ExpandingTable

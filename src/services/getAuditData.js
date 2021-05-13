@@ -9,7 +9,8 @@ export const getAuditData = async (auditEndpoint, dispatch) => {
 		dispatch(changeLoading(true))
 		const response = await fetch(auditEndpoint)
 		const data = await response.json()
-		dispatch(updateData(data.webAuditReportLines))
+		data?.webAuditReportLines && dispatch(updateData(data.webAuditReportLines))
+		data?.itcAuditReportLines && dispatch(updateData(data.itcAuditReportLines))
 		dispatch(changeLoading(false))
 	} catch (error) {
 		dispatch(errorReturned(error))

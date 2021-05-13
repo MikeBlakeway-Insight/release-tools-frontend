@@ -1,4 +1,3 @@
-export { ReportConfigBar } from '../../pages/ReleaseAudits/ConfigBar'
-export { WebReleaseAuditTable } from '../../pages/ReleaseAudits/AuditTable'
-export { ExpandedRow } from './ExpandedRow'
+export { ExpandingTable } from './ExpandingTable/ExpandingTable'
+export { ITCRows } from './ITCRows'
 export { TableHeaders } from './TableHeaders'

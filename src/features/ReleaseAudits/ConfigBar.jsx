@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	Button,
@@ -16,9 +16,9 @@ import {
 	changeRefresh,
 } from './versionSlice'
 import { changeActiveProject } from './projectSlice'
-import { getFixVersions } from '../../services/getFixVersions'
+import { updateData } from './auditSlice'
 
-export const ConfigBar = ({ endpoint }) => {
+export const ConfigBar = () => {
 	const dispatch = useDispatch()
 
 	// State
@@ -29,7 +29,11 @@ export const ConfigBar = ({ endpoint }) => {
 	// Handlers
 	const handlers = {
 		changeFixVersion: (e, { value }) => setActiveVersion(value),
-		changeProject: (e, { value }) => dispatch(changeActiveProject(value)),
+		changeProject: (e, { value }) => {
+			dispatch(changeActiveProject(value))
+			dispatch(changeActiveVersion(''))
+			dispatch(updateData([]))
+		},
 		handleUpdate: e => {
 			e.preventDefault
 			dispatch(changeActiveVersion(activeVersion))
@@ -37,11 +41,6 @@ export const ConfigBar = ({ endpoint }) => {
 		toggleReleased: () => dispatch(changeShowReleased(!version.showReleased)),
 		toggleRefresh: () => dispatch(changeRefresh(!version.refresh)),
 	}
-
-	// Render
-	useEffect(() => {
-		getFixVersions(`${endpoint}?showReleased=${version.showReleased}`, dispatch)
-	}, [version.showReleased])
 
 	return (
 		<>
@@ -111,7 +110,7 @@ export const ConfigBar = ({ endpoint }) => {
 			{version.error || project.error ? (
 				<Message negative>
 					<Message.Header>Error</Message.Header>
-					<p>{version.error || project.error}</p>
+					<p>{version.error.message || project.error.message}</p>
 				</Message>
 			) : (
 				''

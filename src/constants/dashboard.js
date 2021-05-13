@@ -1,10 +1,9 @@
 export const AUDIT_CARDS = [
 	{
-		header: 'WKTLO Release Audit',
-		description:
-			'Run a web release audit for WKTLO tickets, designs and code commits',
-		meta: 'Latest Release: 2021-April.1',
-		href: '/wktlo-release-audit',
+		header: 'Release Audit Tool',
+		description: 'Run a web release audit for WKTLO, GNA, ITC and ICARE',
+		meta: 'Latest Release: 2021-May.1',
+		href: '/release-audits',
 		extra: 'Click to select a release',
 		color: 'blue',
 	},

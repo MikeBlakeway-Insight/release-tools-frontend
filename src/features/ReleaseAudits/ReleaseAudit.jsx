@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Placeholder } from 'semantic-ui-react'
 
-import { getAuditData, getProjects } from '../../services'
+import { getAuditData, getFixVersions, getProjects } from '../../services'
 import { TABLES_CONFIG } from '../../constants/tables'
 import { API_CONSTANTS } from '../../constants/api'
 
@@ -12,14 +12,34 @@ import AuditTable from './AuditTable'
 export const ReleaseAudit = () => {
 	const dispatch = useDispatch()
 
-	const { audit, version } = useSelector(state => state)
+	const { audit, project, version } = useSelector(state => state)
 
-	const {
-		wktlo: { expanded_headers, headers },
-	} = TABLES_CONFIG
+	const { wktlo, itc } = TABLES_CONFIG
 
-	const configBarUrl = `${API_CONSTANTS.versions.url}WKTLO`
-	const auditEndpoint = `${API_CONSTANTS.webAudit.url}?jql=fixVersion=${version.active}&refresh=${version.refresh}`
+	const getAuditEndpoint = project => {
+		switch (project) {
+			case 'ITC':
+				return API_CONSTANTS.itcAudit.url
+
+			default:
+				return API_CONSTANTS.webAudit.url
+		}
+	}
+
+	const getTableHeaders = project => {
+		switch (project) {
+			case 'ITC':
+				return itc
+
+			default:
+				return wktlo
+		}
+	}
+
+	const versionEndpoint = `${API_CONSTANTS.versions.url}${project.active}?showReleased=${version.showReleased}`
+	const auditEndpoint = `${getAuditEndpoint(project.active)}?jql=fixVersion=${
+		version.active
+	}&refresh=${version.refresh}`
 
 	useEffect(() => {
 		version?.active && getAuditData(auditEndpoint, dispatch)
@@ -27,13 +47,17 @@ export const ReleaseAudit = () => {
 
 	useEffect(() => {
 		getProjects(dispatch)
-	}, [API_CONSTANTS.projects.url])
+	}, [])
+
+	useEffect(() => {
+		project.active !== '' && getFixVersions(versionEndpoint, dispatch)
+	}, [version.showReleased, project.active])
 
 	return (
 		<>
 			<Grid.Row data-testid='configbar-container'>
 				<Grid.Column>
-					<ConfigBar endpoint={configBarUrl} />
+					<ConfigBar />
 				</Grid.Column>
 			</Grid.Row>
 			<Grid.Row data-testid='audit-table'>
@@ -44,11 +68,12 @@ export const ReleaseAudit = () => {
 							<Placeholder.Line />
 						</Placeholder>
 					) : (
-						<AuditTable
-							rows={audit.data}
-							expanded_headers={expanded_headers}
-							headers={headers}
-						/>
+						audit?.data && (
+							<AuditTable
+								rows={audit.data}
+								tableHeaders={getTableHeaders(project.active)}
+							/>
+						)
 					)}
 				</Grid.Column>
 			</Grid.Row>

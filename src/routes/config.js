@@ -11,21 +11,15 @@
  * way you do inside a `<Switch>`
  */
 
-import { ReleaseAuditsDashboard, HomePage, PageNotFound } from '../pages'
+import { HomePage, PageNotFound } from '../pages'
 import { ReleaseAudit } from '../features/ReleaseAudits/ReleaseAudit'
 
 export const routesConfig = [
 	{
-		path: '/audit-reports',
-		component: ReleaseAuditsDashboard,
-		title: 'Audit Reports Dashboard',
-		subTitle: 'Select which report you would like to run',
-	},
-	{
-		path: '/wktlo-release-audit',
+		path: '/release-audits',
 		component: ReleaseAudit,
-		title: 'WKTLO Release Audit',
-		subTitle: 'Select which release you would like to audit',
+		title: 'Release Audit Tool',
+		subTitle: 'Select which project you would like to audit',
 	},
 	{
 		path: '/',
