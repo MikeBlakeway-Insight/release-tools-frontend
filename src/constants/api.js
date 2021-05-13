@@ -6,17 +6,16 @@ export const API_CONSTANTS = {
 	versions: {
 		url: '/api/v1/jira/versions/',
 	},
-	webAudit: {
-		url: '/api/v1/insight/web/audit/web',
+	audits: {
+		webAudit: {
+			url: '/api/v1/insight/web/audit/web',
+		},
+		itcAudit: {
+			url: '/api/v1/insight/itc/audit/web',
+		},
 	},
-	itcAudit: {
-		url: '/api/v1/insight/itc/audit/web',
-	},
-	dateOptions: {
-		weekday: undefined,
-		year: 'numeric',
-		month: 'short',
-		day: 'numeric',
-		timezone: 'UTC',
+	cycle_time: {
+		url: 'api/v1/insight/valuestream/cycletime/report',
+		allowed: ['ICARE', 'ITC', 'GNA', 'WKTLO'],
 	},
 }

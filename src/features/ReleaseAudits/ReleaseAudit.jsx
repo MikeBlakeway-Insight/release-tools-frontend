@@ -15,14 +15,15 @@ export const ReleaseAudit = () => {
 	const { audit, project, version } = useSelector(state => state)
 
 	const { wktlo, itc } = TABLES_CONFIG
+	const { audits: AUDITS, versions: VERSIONS } = API_CONSTANTS
 
 	const getAuditEndpoint = project => {
 		switch (project) {
 			case 'ITC':
-				return API_CONSTANTS.itcAudit.url
+				return AUDITS.itcAudit.url
 
 			default:
-				return API_CONSTANTS.webAudit.url
+				return AUDITS.webAudit.url
 		}
 	}
 
@@ -36,7 +37,7 @@ export const ReleaseAudit = () => {
 		}
 	}
 
-	const versionEndpoint = `${API_CONSTANTS.versions.url}${project.active}?showReleased=${version.showReleased}`
+	const versionEndpoint = `${VERSIONS.url}${project.active}?showReleased=${version.showReleased}`
 	const auditEndpoint = `${getAuditEndpoint(project.active)}?jql=fixVersion=${
 		version.active
 	}&refresh=${version.refresh}`

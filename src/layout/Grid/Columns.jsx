@@ -9,7 +9,6 @@ export const ColumnLeft = ({ children }) => {
 		bottom: '0px',
 		left: '0px',
 		width: '250px',
-		background: 'rgb(27, 28, 29)',
 		overflowX: 'hidden',
 		flex: '1 1 0%',
 	}

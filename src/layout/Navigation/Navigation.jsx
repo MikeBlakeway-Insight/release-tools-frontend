@@ -4,6 +4,8 @@ import { endpointsList, reportsList } from './menu-items'
 import MenuContainer from './MenuContainer'
 import { Link } from 'react-router-dom'
 
+import Logo from '../../assets/img/logo.png'
+
 /**
  * ==============
  * * -- Navigation Component -- *
@@ -16,28 +18,28 @@ import { Link } from 'react-router-dom'
  */
 export const Navigation = () => {
 	return (
-		<Menu fluid borderless compact inverted vertical data-testid='Navigation'>
+		<Menu fluid borderless compact vertical data-testid='Navigation'>
 			<Link to='/'>
 				<Header
 					as='h3'
 					textAlign='center'
-					inverted
-					content='SDLC RELEASE TOOL'
+					image={Logo}
+					content='Audit Metrics System'
 					style={{ paddingTop: '1rem' }}
 				/>
 			</Link>
 			<Divider />
 
 			<Menu.Item>
-				<Icon name='paper plane outline' />
-				<Menu.Header>REPORTS</Menu.Header>
+				<Icon name='chain' />
+				<Menu.Header>QUICK LINKS</Menu.Header>
 				<MenuContainer menuItems={reportsList} />
 			</Menu.Item>
 
 			<Divider />
 			<Menu.Item>
-				<Icon name='table' />
-				<Menu.Header>ENDPOINTS</Menu.Header>
+				<Icon name='list ol' />
+				<Menu.Header>By Project</Menu.Header>
 				<MenuContainer menuItems={endpointsList} />
 			</Menu.Item>
 		</Menu>
