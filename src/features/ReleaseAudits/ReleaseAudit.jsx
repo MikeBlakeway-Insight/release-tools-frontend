@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid, Placeholder } from 'semantic-ui-react'
+import { Grid, Placeholder, Table } from 'semantic-ui-react'
 
-import AuditTable from './AuditTable'
 import ConfigBar from '../ConfigBar/ConfigBar'
+import { TableHeaders } from '../../layout/Tables'
 
 import { updateData } from '../redux/auditSlice'
 import { getAuditData, getFixVersions, getProjects } from '../../services'
 import {
 	createVersionEndpoint,
 	createAuditEndpoint,
+	createTableBody,
 	createTableHeaders,
 } from './utils'
 
@@ -21,6 +22,7 @@ export const ReleaseAudit = () => {
 
 	const versionEndpoint = createVersionEndpoint(project, version)
 	const auditEndpoint = createAuditEndpoint(project, version)
+	const { headers, expanded_headers } = createTableHeaders(project.active)
 
 	// retrieve/update project data on initial render
 	useEffect(() => {
@@ -53,11 +55,16 @@ export const ReleaseAudit = () => {
 							<Placeholder.Line />
 						</Placeholder>
 					) : (
-						audit?.data && (
-							<AuditTable
-								rows={audit.data}
-								table_headers={createTableHeaders(project.active)}
-							/>
+						audit.data &&
+						version.active && (
+							<Table color='pink' size='small' celled selectable>
+								<Table.Header>
+									<TableHeaders headers={headers} />
+								</Table.Header>
+								<Table.Body>
+									{createTableBody(audit.data, expanded_headers, project.active)}
+								</Table.Body>
+							</Table>
 						)
 					)}
 				</Grid.Column>

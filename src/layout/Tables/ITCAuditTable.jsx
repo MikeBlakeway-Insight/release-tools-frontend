@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon, Table } from 'semantic-ui-react'
 
-export const ITCRows = ({ rows }) => {
+export const ITCAuditTable = ({ rows }) => {
 	return rows.map(row => (
 		<Table.Row textAlign='center' key={row.issue}>
 			<Table.Cell collapsing textAlign='left'>
@@ -68,4 +68,4 @@ export const ITCRows = ({ rows }) => {
 	))
 }
 
-export default ITCRows
+export default ITCAuditTable

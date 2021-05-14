@@ -1,7 +1,7 @@
 import React from 'react'
-import { ExpandingTable, ITCRows } from '../../../layout/Tables'
-import { API_CONSTANTS } from '../../../constants/api'
-import { TABLES_CONFIG } from '../../../constants/tables'
+import { WebAuditTable, ITCAuditTable } from '../../layout/Tables'
+import { API_CONSTANTS } from '../../constants/api'
+import { TABLES_CONFIG } from '../../constants/tables'
 
 const { audits: AUDITS, versions: VERSIONS } = API_CONSTANTS
 const { wktlo, itc } = TABLES_CONFIG
@@ -26,9 +26,9 @@ export const createAuditEndpoint = (project, version) => {
 
 export const createTableBody = (rows, expanded_headers, project) => {
 	return project !== 'ITC' ? (
-		<ExpandingTable rows={rows} expanded_headers={expanded_headers} />
+		<WebAuditTable rows={rows} expanded_headers={expanded_headers} />
 	) : (
-		<ITCRows rows={rows} />
+		<ITCAuditTable rows={rows} />
 	)
 }
 

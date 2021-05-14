@@ -1,3 +1,3 @@
-export { ExpandingTable } from './ExpandingTable/ExpandingTable'
-export { ITCRows } from './ITCRows'
+export { WebAuditTable } from './WebAuditTable'
+export { ITCAuditTable } from './ITCAuditTable'
 export { TableHeaders } from './TableHeaders'

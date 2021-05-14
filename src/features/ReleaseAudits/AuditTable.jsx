@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
-import { createTableBody } from './utils'
+import { createTableBody, createTableHeaders } from './utils'
 import { TableHeaders } from '../../layout/Tables'
 
-export const AuditTable = ({ table_headers, rows }) => {
+export const AuditTable = ({ rows }) => {
 	const { project, version } = useSelector(state => state)
-	const { headers, expanded_headers } = table_headers
+	const { headers, expanded_headers } = createTableHeaders(project.active)
 
 	return (
 		// checking we have rows before rendering

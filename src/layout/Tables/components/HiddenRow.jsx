@@ -1,9 +1,9 @@
 import React from 'react'
 import { List, Table, Icon } from 'semantic-ui-react'
 
-export const ExpandedRow = ({ headers, row_id, row, visibleRow }) => {
+export const HiddenRow = ({ headers, row_id, row, activeRow }) => {
 	const styles = {
-		display: visibleRow === row_id ? 'table-cell' : 'none',
+		display: activeRow === row_id ? 'table-cell' : 'none',
 		backgroundColor: '#e6f1fd',
 		width: '100%',
 	}
@@ -54,4 +54,4 @@ export const ExpandedRow = ({ headers, row_id, row, visibleRow }) => {
 	)
 }
 
-export default ExpandedRow
+export default HiddenRow

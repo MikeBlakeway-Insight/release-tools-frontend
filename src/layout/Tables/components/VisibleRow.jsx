@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon, Table, Button } from 'semantic-ui-react'
 
-const MainRow = ({ row, changeRowVisibility }) => {
+export const VisibleRow = ({ row, showHiddenRow }) => {
 	return (
 		<Table.Row textAlign='center'>
 			<Table.Cell collapsing textAlign='left'>
@@ -88,7 +88,7 @@ const MainRow = ({ row, changeRowVisibility }) => {
 					disabled={row.codeReviews.length === 0}
 					primary={row.codeReviews.length > 0}
 					row_id={row.issue}
-					onClick={changeRowVisibility}
+					onClick={showHiddenRow}
 				>
 					View
 				</Button>
@@ -96,5 +96,3 @@ const MainRow = ({ row, changeRowVisibility }) => {
 		</Table.Row>
 	)
 }
-
-export default MainRow
