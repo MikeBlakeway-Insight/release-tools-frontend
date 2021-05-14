@@ -5,6 +5,9 @@ body ::-webkit-scrollbar-track {
 body ::-webkit-scrollbar-thumb {
 	background: none;
 }
+body ::-webkit-scrollbar-thumb:hover {
+	background: none;
+}
 
 .col-left {
 	width: 255px;

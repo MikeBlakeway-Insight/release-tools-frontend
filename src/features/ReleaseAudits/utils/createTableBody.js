@@ -1,3 +1,4 @@
+import React from 'react'
 import { ExpandingTable, ITCRows } from '../../../layout/Tables'
 
 export const createTableBody = (rows, expanded_headers, project) => {
