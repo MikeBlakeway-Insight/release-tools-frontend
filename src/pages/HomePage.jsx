@@ -1,5 +1,4 @@
 import React from 'react'
-import ReleaseAuditsDashboard from './ReleaseAuditsDashboard'
 
 import {
 	HighChartDemoArea,
@@ -10,7 +9,6 @@ import {
 export const HomePage = () => {
 	return (
 		<>
-			<ReleaseAuditsDashboard />
 			<StatsExampleRow />
 			<TablesExampleRow />
 			<HighChartDemoArea />

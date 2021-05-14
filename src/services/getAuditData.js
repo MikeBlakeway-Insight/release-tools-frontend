@@ -2,7 +2,7 @@ import {
 	changeLoading,
 	updateData,
 	errorReturned,
-} from '../features/ReleaseAudits/auditSlice'
+} from '../features/redux/auditSlice'
 
 export const getAuditData = async (auditEndpoint, dispatch) => {
 	try {

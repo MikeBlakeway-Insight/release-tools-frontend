@@ -1,16 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
-import { createTableBody } from './utils/createTableBody'
+import { createTableBody } from './utils'
 import { TableHeaders } from '../../layout/Tables'
 
-export const AuditTable = ({ tableHeaders, rows }) => {
+export const AuditTable = ({ table_headers, rows }) => {
 	const { project, version } = useSelector(state => state)
+	const { headers, expanded_headers } = table_headers
 
-	const { headers, expanded_headers } = tableHeaders
-	// checking we have rows before rendering
 	return (
-		version?.active && (
+		// checking we have rows before rendering
+		version.active && (
 			<Table color='pink' size='small' celled selectable>
 				<Table.Header>
 					<TableHeaders headers={headers} />

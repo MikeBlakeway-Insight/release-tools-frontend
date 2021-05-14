@@ -14,11 +14,10 @@ import {
 	changeActiveVersion,
 	changeShowReleased,
 	changeRefresh,
-} from './versionSlice'
-import { changeActiveProject } from './projectSlice'
-import { updateData } from './auditSlice'
+} from '../redux/versionSlice'
+import { changeActiveProject } from '../redux/projectSlice'
 
-export const ConfigBar = () => {
+export const ConfigBar = ({ resetHandler }) => {
 	const dispatch = useDispatch()
 
 	// State
@@ -32,7 +31,7 @@ export const ConfigBar = () => {
 		changeProject: (e, { value }) => {
 			dispatch(changeActiveProject(value))
 			dispatch(changeActiveVersion(''))
-			dispatch(updateData([]))
+			dispatch(resetHandler([]))
 		},
 		handleUpdate: e => {
 			e.preventDefault
