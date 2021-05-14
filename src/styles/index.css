@@ -1,0 +1,59 @@
+body ::-webkit-scrollbar-track {
+	background: none;
+}
+
+body ::-webkit-scrollbar-thumb {
+	background: none;
+}
+
+.col-left {
+	width: 255px;
+	position: fixed;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	overflow-x: hidden;
+}
+
+.col-right {
+	margin-left: 250px;
+	min-width: 550px;
+	background-color: #eee1;
+}
+
+.menu-container {
+	flex: 1;
+	overflow-y: scroll;
+}
+.ui.vertical.menu .item .menu .active.item {
+	font-weight: 500;
+	transform: translateX(10px);
+	color: #d40e8c;
+}
+.ui.vertical.menu .item .menu .link.item:hover,
+.ui.vertical.menu .item .menu a.item {
+	transition: all 0.25s ease-in-out;
+}
+
+.ui.vertical.menu .item .menu .link.item:hover,
+.ui.vertical.menu .item .menu a.item:hover {
+	color: #d40e8c;
+	transform: translateX(10px);
+	transition: all 0.25s ease-in-out;
+}
+
+.ui.dropdown > .icon {
+	color: rgba(34, 36, 38, 0.8);
+}
+.ui.dropdown {
+	border: 1px solid rgba(34, 36, 38, 0.8);
+}
+.ui.disabled.dropdown > .icon {
+	color: rgba(34, 36, 38, 0.15);
+}
+.ui.disabled.dropdown {
+	border: 1px solid rgba(34, 36, 38, 0.15);
+}

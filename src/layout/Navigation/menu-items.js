@@ -1,7 +1,6 @@
 export const endpointsList = [
 	{
 		header: 'Confluence',
-		path: '/confluence',
 		subRoutes: [
 			{
 				name: 'Document Endpoint',
@@ -12,7 +11,6 @@ export const endpointsList = [
 
 	{
 		header: 'Insight - ITC',
-		path: '/insight-itc',
 		subRoutes: [
 			{
 				name: 'Collect ITC Audit Data',
@@ -39,7 +37,6 @@ export const endpointsList = [
 
 	{
 		header: 'Insight - Value Stream',
-		path: '/insight-value-stream',
 		subRoutes: [
 			{
 				name: 'Calculate Cycle Time Report',
@@ -62,7 +59,6 @@ export const endpointsList = [
 
 	{
 		header: 'Insight - Web EMEA',
-		path: '/insight-web-emea',
 		subRoutes: [
 			{
 				name: 'Collect Velocity Data By Sprint',
@@ -81,8 +77,6 @@ export const endpointsList = [
 
 	{
 		header: 'Insight - Web NA',
-		path: '/insight-web-na',
-
 		subRoutes: [
 			{
 				name: 'Collect Velocity GNA',
@@ -108,8 +102,6 @@ export const endpointsList = [
 	},
 	{
 		header: 'Insight - Web Tiger',
-		path: '/insight-web-tiger',
-
 		subRoutes: [
 			{
 				name: 'Collect Tiger Ticket Duration',
@@ -119,8 +111,6 @@ export const endpointsList = [
 	},
 	{
 		header: 'Jira',
-		path: '/jira',
-
 		subRoutes: [
 			{
 				name: 'Boards Endpoint',
@@ -170,8 +160,6 @@ export const endpointsList = [
 	},
 	{
 		header: 'Metrics',
-		path: '/metrics',
-
 		subRoutes: [
 			{
 				name: 'Process Time Api',
@@ -181,8 +169,6 @@ export const endpointsList = [
 	},
 	{
 		header: 'Phabricator',
-		path: '/phabricator',
-
 		subRoutes: [
 			{
 				name: 'Phid Endpoint',
@@ -202,9 +188,12 @@ export const endpointsList = [
 
 export const reportsList = [
 	{
-		header: 'Release Audits',
-		path: '/release-audits',
-
-		subRoutes: [],
+		header: 'Tools',
+		subRoutes: [
+			{
+				name: 'Release Audits',
+				path: '/release-audits',
+			},
+		],
 	},
 ]

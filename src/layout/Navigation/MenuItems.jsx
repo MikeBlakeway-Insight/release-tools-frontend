@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const MenuItems = ({ links }) => {
-	const [activeLink, setActiveLink] = useState('')
-
+const MenuItems = ({ links, activeLinkState }) => {
+	const { activeLink, setActiveLink } = activeLinkState
 	const handleLinkClick = (e, { name }) => setActiveLink(name)
 
 	return links.map((link, i) => (

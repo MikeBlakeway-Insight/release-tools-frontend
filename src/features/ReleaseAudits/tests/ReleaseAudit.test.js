@@ -23,6 +23,12 @@ describe('ReleaseAudit test suite', () => {
 			versions: [],
 			active: '',
 		},
+		project: {
+			loading: false,
+			error: '',
+			projects: [],
+			active: '',
+		},
 	}
 	beforeEach(() => {
 		useSelectorMock.mockClear()

@@ -1,33 +1,16 @@
 import React from 'react'
 
 export const ColumnLeft = ({ children }) => {
-	const styles = {
-		position: 'fixed',
-		display: 'flex',
-		flexDirection: 'column',
-		top: '0px',
-		bottom: '0px',
-		left: '0px',
-		width: '250px',
-		overflowX: 'hidden',
-		flex: '1 1 0%',
-	}
-
 	return (
-		<div style={styles} data-testid='ColumnLeft'>
-			{children}
+		<div className='col-left' data-testid='ColumnLeft'>
+			<div className='menu-container'>{children}</div>
 		</div>
 	)
 }
 
 export const ColumnRight = ({ children }) => {
-	const styles = {
-		marginLeft: '250px',
-		minWidth: '550px',
-		backgroundColor: '#eee1',
-	}
 	return (
-		<div style={styles} data-testid='ColumnRight'>
+		<div className='col-right' data-testid='ColumnRight'>
 			{children}
 		</div>
 	)

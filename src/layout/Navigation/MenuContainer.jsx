@@ -2,16 +2,13 @@ import React from 'react'
 import { Menu } from 'semantic-ui-react'
 
 import MenuItems from './MenuItems'
-import { Link } from 'react-router-dom'
 
-export const MenuContainer = ({ menuItems }) => {
+export const MenuContainer = ({ menuItems, activeLinkState }) => {
 	return menuItems.map((item, i) => (
 		<Menu.Item key={i}>
-			<Link to={item.path}>
-				<Menu.Header>{item.header}</Menu.Header>
-			</Link>
+			<Menu.Header>{item.header}</Menu.Header>
 			<Menu.Menu>
-				<MenuItems links={item.subRoutes} />
+				<MenuItems links={item.subRoutes} activeLinkState={activeLinkState} />
 			</Menu.Menu>
 		</Menu.Item>
 	))

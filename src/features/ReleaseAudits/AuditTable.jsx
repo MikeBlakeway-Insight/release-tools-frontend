@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Table } from 'semantic-ui-react'
-
-import { ExpandingTable, TableHeaders, ITCRows } from '../../layout/Tables'
+import { createTableBody } from './utils/createTableBody'
+import { TableHeaders } from '../../layout/Tables'
 
 export const AuditTable = ({ tableHeaders, rows }) => {
 	const { project, version } = useSelector(state => state)
@@ -16,18 +16,10 @@ export const AuditTable = ({ tableHeaders, rows }) => {
 					<TableHeaders headers={headers} />
 				</Table.Header>
 				<Table.Body>
-					{getTableBody(rows, expanded_headers, project.active)}
+					{createTableBody(rows, expanded_headers, project.active)}
 				</Table.Body>
 			</Table>
 		)
-	)
-}
-
-const getTableBody = (rows, expanded_headers, project) => {
-	return project !== 'ITC' ? (
-		<ExpandingTable rows={rows} expanded_headers={expanded_headers} />
-	) : (
-		<ITCRows rows={rows} />
 	)
 }
 

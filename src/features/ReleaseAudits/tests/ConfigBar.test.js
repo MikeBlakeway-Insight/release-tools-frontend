@@ -18,6 +18,12 @@ describe('ConfigBar test suite', () => {
 			versions: [],
 			active: '',
 		},
+		project: {
+			loading: false,
+			error: '',
+			projects: [],
+			active: '',
+		},
 	}
 
 	beforeEach(() => {
