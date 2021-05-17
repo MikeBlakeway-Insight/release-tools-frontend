@@ -1,0 +1,5 @@
+export { default as Bug } from '@atlaskit/icon-object/glyph/bug/16'
+export { default as Task } from '@atlaskit/icon-object/glyph/task/16'
+export { default as Story } from '@atlaskit/icon-object/glyph/story/16'
+export { default as Issue } from '@atlaskit/icon-object/glyph/issue/16'
+export { default as Problem } from '@atlaskit/icon-object/glyph/problem/16'
