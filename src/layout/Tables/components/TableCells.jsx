@@ -118,7 +118,7 @@ const DesignReviewed = ({ designReviewed, type }) =>
 	)
 
 const RequiresCode = ({ requiresCode, type }) =>
-	type === 'Bug' || type === 'Task' ? (
+	type === 'Task' ? (
 		<Table.Cell collapsing>
 			<Icon disabled name='minus' />
 		</Table.Cell>
@@ -133,7 +133,7 @@ const RequiresCode = ({ requiresCode, type }) =>
 	)
 
 const CodeCommitted = ({ codeCommitted, type }) =>
-	type === 'Bug' || type === 'Task' ? (
+	type === 'Task' ? (
 		<Table.Cell collapsing>
 			<Icon disabled name='minus' />
 		</Table.Cell>
