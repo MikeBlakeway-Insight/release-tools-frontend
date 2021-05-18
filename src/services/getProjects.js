@@ -4,7 +4,7 @@ import {
 	projectsLoading,
 	errorReturned,
 	updateProjects,
-} from '../features/redux/projectSlice'
+} from '../redux/projectSlice'
 import { createDropdownList } from './utils/createDropdownList'
 
 export const getProjects = async dispatch => {

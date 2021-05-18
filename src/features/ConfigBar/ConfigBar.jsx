@@ -14,8 +14,8 @@ import {
 	changeActiveVersion,
 	changeShowReleased,
 	changeRefresh,
-} from '../redux/versionSlice'
-import { changeActiveProject } from '../redux/projectSlice'
+} from '../../redux/versionSlice'
+import { changeActiveProject } from '../../redux/projectSlice'
 
 export const ConfigBar = ({ resetHandler }) => {
 	const dispatch = useDispatch()

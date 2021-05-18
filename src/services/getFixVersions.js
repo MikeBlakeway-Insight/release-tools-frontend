@@ -2,7 +2,7 @@ import {
 	changeLoading,
 	errorReturned,
 	updateVersions,
-} from '../features/redux/versionSlice'
+} from '../redux/versionSlice'
 
 import { createDropdownList } from './utils/createDropdownList'
 

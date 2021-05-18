@@ -1,8 +1,4 @@
-import {
-	changeLoading,
-	updateData,
-	errorReturned,
-} from '../features/redux/auditSlice'
+import { changeLoading, updateData, errorReturned } from '../redux/auditSlice'
 
 export const getAuditData = async (auditEndpoint, dispatch) => {
 	try {

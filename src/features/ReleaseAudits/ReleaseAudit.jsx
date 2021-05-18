@@ -5,9 +5,9 @@ import { Grid, Placeholder, Table } from 'semantic-ui-react'
 import ConfigBar from '../ConfigBar/ConfigBar'
 import { TableHeaders } from '../../layout/Tables'
 
-import { updateData } from '../redux/auditSlice'
+import { updateData } from '../../redux/auditSlice'
 import { getAuditData, getFixVersions, getProjects } from '../../services'
-import { default as utils } from './utils'
+import utils from './utils'
 
 export const ReleaseAudit = () => {
 	const dispatch = useDispatch()
