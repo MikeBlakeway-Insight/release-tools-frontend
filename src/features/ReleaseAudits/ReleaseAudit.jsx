@@ -7,12 +7,7 @@ import { TableHeaders } from '../../layout/Tables'
 
 import { updateData } from '../redux/auditSlice'
 import { getAuditData, getFixVersions, getProjects } from '../../services'
-import {
-	createVersionEndpoint,
-	createAuditEndpoint,
-	createTableBody,
-	createTableHeaders,
-} from './utils'
+import { default as utils } from './utils'
 
 export const ReleaseAudit = () => {
 	const dispatch = useDispatch()
@@ -20,9 +15,9 @@ export const ReleaseAudit = () => {
 	// retrieving state from redux
 	const { audit, project, version } = useSelector(state => state)
 
-	const versionEndpoint = createVersionEndpoint(project, version)
-	const auditEndpoint = createAuditEndpoint(project, version)
-	const { headers, expanded_headers } = createTableHeaders(project.active)
+	const versionEndpoint = utils.createVersionEndpoint(project, version)
+	const auditEndpoint = utils.createAuditEndpoint(project, version)
+	const { headers, expanded_headers } = utils.createTableHeaders(project.active)
 
 	// retrieve/update project data on initial render
 	useEffect(() => {
@@ -62,7 +57,7 @@ export const ReleaseAudit = () => {
 									<TableHeaders headers={headers} />
 								</Table.Header>
 								<Table.Body>
-									{createTableBody(audit.data, expanded_headers, project.active)}
+									{utils.createTableBody(audit.data, expanded_headers, project.active)}
 								</Table.Body>
 							</Table>
 						)

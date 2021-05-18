@@ -16,28 +16,34 @@ const selectAuditEndpoint = project => {
 	}
 }
 
-export const createVersionEndpoint = (project, version) =>
-	`${VERSIONS.url}${project.active}?showReleased=${version.showReleased}`
+export const utils = {
+	createAuditEndpoint: (project, version) => {
+		const endpoint = selectAuditEndpoint(project.active)
+		return `${endpoint}?jql=fixVersion=${version.active}&refresh=${version.refresh}`
+	},
 
-export const createAuditEndpoint = (project, version) => {
-	const endpoint = selectAuditEndpoint(project.active)
-	return `${endpoint}?jql=fixVersion=${version.active}&refresh=${version.refresh}`
+	createVersionEndpoint: (project, version) =>
+		`${VERSIONS.url}${project.active}?showReleased=${version.showReleased}`,
+
+	createTableBody: (rows, expanded_headers, project) =>
+		project !== 'ITC' ? (
+			<WebAuditTable rows={rows} expanded_headers={expanded_headers} />
+		) : (
+			<ITCAuditTable rows={rows} />
+		),
+	createTableHeaders: project => {
+		switch (project) {
+			case 'ITC':
+				return itc
+
+			default:
+				return wktlo
+		}
+	},
 }
 
-export const createTableBody = (rows, expanded_headers, project) => {
-	return project !== 'ITC' ? (
-		<WebAuditTable rows={rows} expanded_headers={expanded_headers} />
-	) : (
-		<ITCAuditTable rows={rows} />
-	)
-}
+// prevents eslint warning about not having a displayName
+// not sure why this particular function feels it is so special
+utils.createTableBody.displayName = 'createTableBody'
 
-export const createTableHeaders = project => {
-	switch (project) {
-		case 'ITC':
-			return itc
-
-		default:
-			return wktlo
-	}
-}
+export default utils
