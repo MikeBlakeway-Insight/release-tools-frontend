@@ -11,22 +11,22 @@ export const versionSlice = createSlice({
 		active: '',
 	},
 	reducers: {
-		changeLoading: (state, action) => {
+		changeLoading(state, action) {
 			return { ...state, loading: action.payload }
 		},
-		errorReturned: (state, action) => {
+		errorReturned(state, action) {
 			return { ...state, error: action.payload }
 		},
-		updateVersions: (state, action) => {
+		updateVersions(state, action) {
 			return { ...state, versions: action.payload }
 		},
-		changeShowReleased: (state, action) => {
+		changeShowReleased(state, action) {
 			return { ...state, showReleased: action.payload }
 		},
-		changeRefresh: (state, action) => {
+		changeRefresh(state, action) {
 			return { ...state, refresh: action.payload }
 		},
-		changeActiveVersion: (state, action) => {
+		changeActiveVersion(state, action) {
 			return { ...state, active: action.payload }
 		},
 	},

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { render } from '@testing-library/react'
 
-import { HomePage, PageNotFound, ReleaseAuditsDashboard } from '..'
+import { HomePage, PageNotFound } from '..'
 
 describe('Pages test suite', () => {
 	test('renders HomePage', () => {
@@ -10,8 +10,5 @@ describe('Pages test suite', () => {
 	})
 	test('renders PageNotFound', () => {
 		render(<PageNotFound />)
-	})
-	test('renders ReleaseAuditsDashboard', () => {
-		render(<ReleaseAuditsDashboard />)
 	})
 })

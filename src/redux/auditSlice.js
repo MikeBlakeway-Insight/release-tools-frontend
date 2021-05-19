@@ -8,13 +8,13 @@ export const auditSlice = createSlice({
 		data: [],
 	},
 	reducers: {
-		changeLoading: (state, action) => {
+		changeLoading(state, action) {
 			return { ...state, loading: action.payload }
 		},
-		updateData: (state, action) => {
+		updateData(state, action) {
 			return { ...state, data: action.payload }
 		},
-		errorReturned: (state, action) => {
+		errorReturned(state, action) {
 			return { ...state, error: action.payload }
 		},
 	},

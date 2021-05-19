@@ -2,7 +2,7 @@ import React from 'react'
 import * as redux from 'react-redux'
 import { render } from '@testing-library/react'
 
-import ReleaseAudit from '../ReleaseAudit'
+import ReleaseAudit from '../ReleaseAudits/ReleaseAudit'
 
 describe('ReleaseAudit test suite', () => {
 	const useSelectorMock = jest.spyOn(redux, 'useSelector')

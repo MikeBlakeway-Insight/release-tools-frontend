@@ -159,7 +159,7 @@ const DesignReviewedBy = ({ designReviewedBy, type }) =>
 const Status = ({ status }) => (
 	<Table.Cell
 		collapsing
-		warning={status === 'In Progress'}
+		warning={status === 'In Progress' || status === 'Acceptance'}
 		positive={status === 'Done'}
 		error={status === 'Unassigned'}
 	>

@@ -2,7 +2,7 @@ import React from 'react'
 import * as redux from 'react-redux'
 import { render } from '@testing-library/react'
 
-import ConfigBar from '../ConfigBar'
+import ConfigBar from '../ConfigBar/ConfigBar'
 
 describe('ConfigBar test suite', () => {
 	const useSelectorMock = jest.spyOn(redux, 'useSelector')

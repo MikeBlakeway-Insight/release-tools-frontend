@@ -17,21 +17,24 @@ const selectAuditEndpoint = project => {
 }
 
 export const utils = {
-	createAuditEndpoint: (project, version) => {
+	createAuditEndpoint(project, version) {
 		const endpoint = selectAuditEndpoint(project.active)
 		return `${endpoint}?jql=fixVersion=${version.active}&refresh=${version.refresh}`
 	},
 
-	createVersionEndpoint: (project, version) =>
-		`${VERSIONS.url}${project.active}?showReleased=${version.showReleased}`,
+	createVersionEndpoint(project, version) {
+		return `${VERSIONS.url}${project.active}?showReleased=${version.showReleased}`
+	},
 
-	createTableBody: (rows, expanded_headers, project) =>
-		project !== 'ITC' ? (
+	createTableBody(rows, expanded_headers, project) {
+		return project !== 'ITC' ? (
 			<WebAuditTable rows={rows} expanded_headers={expanded_headers} />
 		) : (
 			<ITCAuditTable rows={rows} />
-		),
-	createTableHeaders: project => {
+		)
+	},
+
+	createTableHeaders(project) {
 		switch (project) {
 			case 'ITC':
 				return itc

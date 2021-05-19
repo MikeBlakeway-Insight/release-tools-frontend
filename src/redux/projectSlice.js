@@ -9,16 +9,16 @@ export const projectSlice = createSlice({
 		active: '',
 	},
 	reducers: {
-		projectsLoading: (state, action) => {
+		projectsLoading(state, action) {
 			return { ...state, loading: action.payload }
 		},
-		errorReturned: (state, action) => {
+		errorReturned(state, action) {
 			return { ...state, error: action.payload }
 		},
-		updateProjects: (state, action) => {
+		updateProjects(state, action) {
 			return { ...state, projects: action.payload }
 		},
-		changeActiveProject: (state, action) => {
+		changeActiveProject(state, action) {
 			return { ...state, active: action.payload }
 		},
 	},
