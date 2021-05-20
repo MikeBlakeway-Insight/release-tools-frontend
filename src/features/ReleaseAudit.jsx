@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Placeholder, Table } from 'semantic-ui-react'
 
-import ConfigBar from '../ConfigBar/ConfigBar'
-import { TableHeaders } from '../../layout/Tables'
+import ConfigBar from './ConfigBar'
+import { TableHeaders } from '../layout/Tables'
 
-import { updateData } from '../../redux/auditSlice'
-import { getAuditData, getFixVersions, getProjects } from '../../services'
+import { updateData } from '../redux/auditSlice'
+import { getAuditData, getFixVersions, getProjects } from '../services'
 import utils from './utils'
 
 export const ReleaseAudit = () => {

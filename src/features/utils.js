@@ -1,12 +1,12 @@
 import React from 'react'
-import { WebAuditTable, ITCAuditTable } from '../../layout/Tables'
-import { API_CONSTANTS } from '../../constants/api'
-import { TABLES_CONFIG } from '../../constants/tables'
+import { WebAuditTable, ITCAuditTable } from '../layout/Tables'
+import { API_CONSTANTS } from '../constants/api'
+import { TABLES_CONFIG } from '../constants/tables'
 
 const { audits: AUDITS, versions: VERSIONS } = API_CONSTANTS
 const { wktlo, itc } = TABLES_CONFIG
 
-const selectAuditEndpoint = project => {
+export const selectAuditEndpoint = project => {
 	switch (project) {
 		case 'ITC':
 			return AUDITS.itcAudit.url

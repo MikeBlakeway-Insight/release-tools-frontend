@@ -12,7 +12,7 @@
  */
 
 import { HomePage, PageNotFound } from '../pages'
-import { ReleaseAudit } from '../features/ReleaseAudits/ReleaseAudit'
+import { ReleaseAudit } from '../features/ReleaseAudit'
 
 export const routesConfig = [
 	{
