@@ -2,7 +2,7 @@ import React from 'react'
 import * as redux from 'react-redux'
 import { render } from '@testing-library/react'
 
-import ReleaseAudit from '../ReleaseAudits/ReleaseAudit'
+import ReleaseAudit from '../ReleaseAudit'
 
 describe('ReleaseAudit test suite', () => {
 	const useSelectorMock = jest.spyOn(redux, 'useSelector')
@@ -27,7 +27,7 @@ describe('ReleaseAudit test suite', () => {
 			loading: false,
 			error: '',
 			projects: [],
-			active: '',
+			active: 'WKTLO',
 		},
 	}
 	beforeEach(() => {

@@ -7,12 +7,25 @@ const { audits: AUDITS, versions: VERSIONS } = API_CONSTANTS
 const { wktlo, itc } = TABLES_CONFIG
 
 export const selectAuditEndpoint = project => {
-	switch (project) {
-		case 'ITC':
-			return AUDITS.itcAudit.url
+	if (typeof project === 'string' || project instanceof String) {
+		switch (project) {
+			case 'ITC':
+				return AUDITS.itcAudit.url
 
-		default:
-			return AUDITS.webAudit.url
+			case 'ICARE':
+				return AUDITS.webAudit.url
+
+			case 'GNA':
+				return AUDITS.webAudit.url
+
+			case 'WKTLO':
+				return AUDITS.webAudit.url
+
+			default:
+				'WKTLO'
+		}
+	} else {
+		throw Error('Project must be a string')
 	}
 }
 
