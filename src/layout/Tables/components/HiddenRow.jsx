@@ -27,16 +27,21 @@ export const HiddenRow = ({ headers, row_id, row, activeRow }) => {
 							{row.map(cell => (
 								<Table.Row key={cell.id} textAlign='center'>
 									<Table.Cell collapsing>{cell.id}</Table.Cell>
-									<Table.Cell collapsing>{cell.title}</Table.Cell>
+									<Table.Cell>{cell.title}</Table.Cell>
 									<Table.Cell collapsing>
 										<a rel='noreferrer' target='_blank' href={cell.link}>
 											{`D${cell.id}`}
 										</a>
 									</Table.Cell>
-									<Table.Cell collapsing>{cell.status}</Table.Cell>
-									<Table.Cell collapsing>
-										{cell.closed ? <Icon name='check' /> : <Icon name='close' />}
+
+									<Table.Cell positive={cell.status === 'Published'} collapsing>
+										{cell.status}
 									</Table.Cell>
+
+									<Table.Cell positive={cell.closed} warning={!cell.closed} collapsing>
+										<Icon name={cell.closed ? 'check' : 'close'} />
+									</Table.Cell>
+
 									<Table.Cell collapsing>{cell.author}</Table.Cell>
 									<Table.Cell collapsing>{cell.reviewer}</Table.Cell>
 									<Table.Cell collapsing>

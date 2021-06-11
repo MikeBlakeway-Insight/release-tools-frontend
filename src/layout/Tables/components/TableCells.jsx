@@ -45,9 +45,7 @@ const Developer = ({ developer }) => (
 )
 
 const Summary = ({ summary }) => (
-	<Table.Cell collapsing textAlign='left'>
-		{summary}
-	</Table.Cell>
+	<Table.Cell textAlign='left'>{summary}</Table.Cell>
 )
 
 const Tickets = ({ itcTickets }) => (

@@ -26,34 +26,39 @@ export const ITCAuditTable = ({ rows }) => {
 			</Table.Cell>
 			<Table.Cell
 				collapsing
-				warning={row.status === 'In Progress'}
+				warning={row.status !== 'Done'}
 				positive={row.status === 'Done'}
-				error={row.status === 'Unassigned'}
+				error={row.status === ''}
 			>
-				{row.status}
+				{row.status === 'Done' ? <strong>Done</strong> : row.status}
 			</Table.Cell>
-			{row.inProduction ? (
-				<Table.Cell positive collapsing>
-					<Icon name='check' />
-				</Table.Cell>
-			) : (
-				<Table.Cell error collapsing>
-					<Icon name='close' />
-				</Table.Cell>
-			)}
+			<Table.Cell positive={row.inProduction} error={!row.inProduction} collapsing>
+				<Icon name={row.inProduction ? 'check' : 'close'} />
+			</Table.Cell>
 			<Table.Cell collapsing>{row.releaseDate}</Table.Cell>
 			<Table.Cell collapsing>{row.fixVersion}</Table.Cell>
-			{row.sdlcCabTicket !== '' ? (
-				<Table.Cell positive collapsing>
-					<Icon name='check' />
-				</Table.Cell>
-			) : (
-				<Table.Cell error collapsing>
-					<Icon name='close' />
-				</Table.Cell>
-			)}
-			<Table.Cell collapsing>{row.sdlcCabTicket}</Table.Cell>
-			<Table.Cell collapsing>{row.sdlcTechnicalOwner}</Table.Cell>
+			<Table.Cell
+				positive={row.sdlcCabTicket !== ''}
+				error={row.sdlcCabTicket === ''}
+				collapsing
+			>
+				<Icon name={row.sdlcCabTicket !== '' ? 'check' : 'close'} />
+			</Table.Cell>
+			<Table.Cell error={row.sdlcCabTicket === ''} collapsing>
+				{row.sdlcCabTicket === '' ? <Icon name='close' /> : row.sdlcCabTicket}
+			</Table.Cell>
+
+			<Table.Cell
+				positive={!row.sdlcTechnicalOwner === ''}
+				error={row.sdlcTechnicalOwner === ''}
+				collapsing
+			>
+				{row.sdlcTechnicalOwner !== '' ? (
+					row.sdlcTechnicalOwner
+				) : (
+					<strong>UNASSIGNED</strong>
+				)}
+			</Table.Cell>
 			<Table.Cell collapsing>{row.sdlcTester}</Table.Cell>
 
 			<Table.Cell
