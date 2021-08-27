@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Header, Menu, Divider, Icon } from 'semantic-ui-react'
-import { endpointsList, reportsList } from './menu-items'
+import { endpointsList } from './menu-items'
 import MenuContainer from './MenuContainer'
 import { Link } from 'react-router-dom'
 
@@ -27,22 +27,13 @@ export const Navigation = () => {
 					as='h3'
 					textAlign='center'
 					image={Logo}
-					content='Audit Metrics System'
+					content='Users Controller Tool'
 					style={{ paddingTop: '1rem' }}
 				/>
 			</Link>
 			<Divider />
 
 			<Menu.Item>
-				<Icon name='chain' />
-				<Menu.Header>Quick Links</Menu.Header>
-				<MenuContainer menuItems={reportsList} activeLinkState={activeLinkState} />
-			</Menu.Item>
-
-			<Divider />
-			<Menu.Item>
-				<Icon name='list ol' />
-				<Menu.Header>By Project</Menu.Header>
 				<MenuContainer
 					menuItems={endpointsList}
 					activeLinkState={activeLinkState}
